@@ -14,6 +14,7 @@
             --ix-brand-petrol-hover: #00b3b3;
             --ix-brand-petrol-active: #008080;
             --ix-brand-navy: #000028;
+            --ix-brand-navy-dark: #00001a;
             --ix-brand-teal: #00FFB9;
             --ix-brand-sand: #f0ede8;
 
@@ -38,12 +39,12 @@
             --ix-gray-70: #384652;
             --ix-gray-80: #232d36;
             --ix-gray-90: #161e25;
-            --ix-gray-100: #0d1217;
+            --ix-gray-100: #080d14;
 
             /* Common Tokens */
             --radius-sm: 4px;
             --radius-md: 6px;
-            --radius-lg: 8px;
+            --radius-lg: 10px;
             --font-stack: 'Siemens Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
@@ -51,23 +52,23 @@
            DARK THEME (Default iX Industrial Dark Mode)
            -------------------------------------------------------------------------- */
         [data-theme="dark"] {
-            --bg-app: var(--ix-gray-100);
-            --bg-header: var(--ix-brand-navy);
-            --bg-sidebar: var(--ix-gray-90);
-            --bg-panel: #141c23;
-            --bg-card: #1b252e;
-            --bg-card-hover: #222f3b;
-            --bg-input: #121920;
-            --border-color: #263542;
-            --border-subtle: #1c2731;
+            --bg-app: #040914;
+            --bg-header: #000028;
+            --bg-sidebar: #09111e;
+            --bg-panel: #0d1726;
+            --bg-card: #0e1b2e;
+            --bg-card-hover: #152742;
+            --bg-input: #08111d;
+            --border-color: #1a2e47;
+            --border-subtle: #132235;
 
             --text-primary: #ffffff;
-            --text-secondary: #9cb1c2;
-            --text-muted: #6e8292;
-            --text-inverse: var(--ix-brand-navy);
+            --text-secondary: #9cb5cf;
+            --text-muted: #5e7794;
+            --text-inverse: #000028;
 
-            --component-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            --card-border: 1px solid var(--border-color);
+            --component-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --card-border: 1px solid #1a2e47;
         }
 
         /* --------------------------------------------------------------------------
@@ -79,7 +80,7 @@
             --bg-sidebar: var(--ix-gray-0);
             --bg-panel: #ffffff;
             --bg-card: var(--ix-gray-0);
-            --bg-card-hover: #f9fbfd;
+            --bg-card-hover: #f1f6fa;
             --bg-input: #ffffff;
             --border-color: var(--ix-gray-30);
             --border-subtle: var(--ix-gray-20);
@@ -211,7 +212,7 @@
 
         /* Sidebar Navigation */
         .ix-sidebar {
-            width: 280px;
+            width: 270px;
             background-color: var(--bg-sidebar);
             border-right: 1px solid var(--border-color);
             display: flex;
@@ -269,85 +270,216 @@
         /* Workspace Area */
         .ix-workspace {
             flex: 1;
-            padding: 28px 32px;
+            padding: 24px 30px;
             overflow-y: auto;
             background-color: var(--bg-app);
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 22px;
         }
 
         .tab-view {
             display: none;
             flex-direction: column;
-            gap: 24px;
+            gap: 22px;
         }
 
         .tab-view.active {
             display: flex;
         }
 
-        /* --------------------------------------------------------------------------
-           TYPOGRAPHY & CARDS
-           -------------------------------------------------------------------------- */
+        /* Typography & Headings */
         .page-title {
-            font-size: 26px;
-            font-weight: 300;
+            font-size: 24px;
+            font-weight: 400;
             color: var(--text-primary);
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
         }
 
         .page-subtitle {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
             margin-top: 4px;
         }
 
-        .grid-layout-3 {
+        /* --------------------------------------------------------------------------
+           TOP METRICS KPI CARDS (Matching Screenshot)
+           -------------------------------------------------------------------------- */
+        .metrics-top-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
         }
 
-        .grid-layout-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-            gap: 24px;
+        @media (max-width: 1024px) {
+            .metrics-top-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .ix-card {
+        .metric-card-top {
             background-color: var(--bg-card);
             border: var(--card-border);
             border-radius: var(--radius-lg);
-            padding: 24px;
+            padding: 18px 20px;
             box-shadow: var(--component-shadow);
             position: relative;
             overflow: hidden;
         }
 
-        .ix-card::before {
+        .metric-card-top::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 3px;
-            background-color: var(--ix-brand-petrol);
         }
 
-        .ix-card.accent-teal::before {
-            background-color: var(--ix-brand-teal);
+        .metric-card-top.teal-bar::before { background-color: var(--ix-brand-teal); }
+        .metric-card-top.blue-bar::before { background-color: #2979ff; }
+        .metric-card-top.green-bar::before { background-color: var(--ix-status-success); }
+        .metric-card-top.yellow-bar::before { background-color: #ffab00; }
+
+        .metric-top-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .metric-top-val {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .metric-top-val span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .metric-top-sub {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* --------------------------------------------------------------------------
+           NAVIGATE TO A SIMULATOR (Menu Links Hub Matching Screenshot)
+           -------------------------------------------------------------------------- */
+        .section-header-nav {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .nav-hub-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 1200px) {
+            .nav-hub-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .hub-link-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--component-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 145px;
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .hub-link-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--ix-brand-petrol);
+            background-color: var(--bg-card-hover);
+        }
+
+        .hub-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .hub-icon-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ix-brand-teal);
+        }
+
+        .hub-badge-pill {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background-color: rgba(255, 255, 255, 0.06);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .hub-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .hub-card-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        /* --------------------------------------------------------------------------
+           GENERAL CARDS, FORMS & TABLES
+           -------------------------------------------------------------------------- */
+        .ix-card {
+            background-color: var(--bg-card);
+            border: var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            box-shadow: var(--component-shadow);
+            position: relative;
+            overflow: hidden;
         }
 
         .card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .card-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--text-primary);
             display: flex;
@@ -355,45 +487,14 @@
             gap: 8px;
         }
 
-        /* --------------------------------------------------------------------------
-           SCENARIO CONTROLLERS (Dashboard Bar)
-           -------------------------------------------------------------------------- */
-        .scenario-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            padding: 12px 18px;
-            border-radius: var(--radius-md);
+        .grid-layout-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 20px;
         }
 
-        .scenario-btn {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 8px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .scenario-btn:hover {
-            background-color: rgba(0, 153, 153, 0.15);
-            border-color: var(--ix-brand-petrol);
-            color: var(--ix-brand-teal);
-        }
-
-        /* --------------------------------------------------------------------------
-           FORM ELEMENTS (Inputs, Selects, Buttons)
-           -------------------------------------------------------------------------- */
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .form-label {
@@ -423,7 +524,7 @@
             flex: 1;
             background: none;
             border: none;
-            padding: 10px 14px;
+            padding: 9px 12px;
             color: var(--text-primary);
             font-size: 14px;
             outline: none;
@@ -431,7 +532,7 @@
         }
 
         .input-addon {
-            padding: 10px 14px;
+            padding: 9px 12px;
             background-color: rgba(255, 255, 255, 0.03);
             border-left: 1px solid var(--border-color);
             color: var(--text-muted);
@@ -452,15 +553,11 @@
             cursor: pointer;
         }
 
-        .ix-select:focus {
-            border-color: var(--ix-brand-petrol);
-        }
-
         .ix-btn {
             background-color: var(--ix-brand-petrol);
             color: #ffffff;
             border: none;
-            padding: 10px 22px;
+            padding: 10px 20px;
             border-radius: var(--radius-sm);
             font-size: 14px;
             font-weight: 600;
@@ -471,24 +568,15 @@
             gap: 8px;
         }
 
-        .ix-btn:hover {
-            background-color: var(--ix-brand-petrol-hover);
-        }
+        .ix-btn:hover { background-color: var(--ix-brand-petrol-hover); }
 
-        .ix-btn:active {
-            background-color: var(--ix-brand-petrol-active);
-        }
-
-        /* --------------------------------------------------------------------------
-           FORMULA DISPLAY BOX (Mathematical & Engineering Modeling)
-           -------------------------------------------------------------------------- */
         .formula-box {
             background-color: rgba(0, 153, 153, 0.06);
             border: 1px solid rgba(0, 153, 153, 0.25);
             border-left: 4px solid var(--ix-brand-petrol);
             border-radius: var(--radius-md);
             padding: 14px 18px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .formula-header {
@@ -510,33 +598,26 @@
             line-height: 1.6;
         }
 
-        .formula-item {
-            margin: 4px 0;
-        }
-
         .formula-var {
             color: var(--ix-brand-teal);
             font-weight: 600;
         }
 
-        /* --------------------------------------------------------------------------
-           CALCULATION RESULTS & BADGES
-           -------------------------------------------------------------------------- */
         .result-panel {
-            background-color: rgba(0, 0, 0, 0.12);
+            background-color: rgba(0, 0, 0, 0.15);
             border: 1px dashed var(--border-color);
             border-radius: var(--radius-md);
             padding: 16px 20px;
-            margin-top: 20px;
+            margin-top: 18px;
         }
 
         .result-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 9px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .result-row:last-child {
@@ -546,38 +627,18 @@
         .result-val {
             font-weight: 700;
             color: var(--ix-brand-teal);
-            font-size: 15px;
+            font-size: 14px;
         }
 
-        .result-val.danger {
-            color: var(--ix-status-danger);
-        }
-
-        .result-val.success {
-            color: var(--ix-status-success);
-        }
-
-        .result-section-title {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--ix-brand-petrol);
-            margin: 12px 0 6px 0;
-            padding-bottom: 4px;
-            border-bottom: 1px solid rgba(0, 153, 153, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .result-val.danger { color: var(--ix-status-danger); }
+        .result-val.success { color: var(--ix-status-success); }
 
         .ix-badge {
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 12px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .badge-success {
@@ -592,13 +653,7 @@
             border: 1px solid rgba(255, 51, 75, 0.3);
         }
 
-        .badge-warning {
-            background-color: var(--ix-status-warning-bg);
-            color: var(--ix-status-warning);
-            border: 1px solid rgba(255, 179, 0, 0.3);
-        }
-
-        /* Tables */
+        /* TABLE STYLING */
         .ix-table-wrapper {
             overflow-x: auto;
             border: 1px solid var(--border-color);
@@ -612,40 +667,29 @@
         }
 
         .ix-table th {
-            background-color: rgba(0, 153, 153, 0.1);
+            background-color: rgba(0, 153, 153, 0.12);
             color: var(--text-primary);
-            padding: 12px 16px;
+            padding: 10px 14px;
             font-weight: 600;
             text-align: left;
             border-bottom: 2px solid var(--ix-brand-petrol);
         }
 
         .ix-table td {
-            padding: 12px 16px;
+            padding: 9px 14px;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-secondary);
+        }
+
+        .ix-table tr.sub-header td {
+            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--ix-brand-teal);
+            font-weight: 700;
         }
 
         .ix-table tr:hover td {
             color: var(--text-primary);
             background-color: rgba(255, 255, 255, 0.02);
-        }
-
-        /* Progress indicator */
-        .metric-bar-bg {
-            width: 100%;
-            height: 8px;
-            background-color: rgba(255, 255, 255, 0.08);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .metric-bar-fill {
-            height: 100%;
-            background-color: var(--ix-brand-teal);
-            border-radius: 4px;
-            transition: width 0.4s ease;
         }
     </style>
 </head>
@@ -662,12 +706,12 @@
         </div>
         <div class="header-actions">
             <button class="theme-toggle-btn" onclick="toggleAppTheme()">
-                <svg class="ix-icon" id="theme-svg-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/></svg>
                 <span id="theme-label">Light Theme</span>
             </button>
             <div style="font-size: 12px; color: var(--ix-brand-teal); display: flex; align-items: center; gap: 6px;">
                 <span style="width: 8px; height: 8px; background: var(--ix-brand-teal); border-radius: 50%; display: inline-block;"></span>
-                Appendix 6 Model Active
+                Appendix 6 Engine
             </div>
         </div>
     </header>
@@ -681,31 +725,31 @@
                 <div class="nav-group-title">Navigation & Modules</div>
                 <ul class="nav-list">
                     <li>
-                        <a class="nav-item active" onclick="navigate('tab-overview', this)">
+                        <a id="nav-overview" class="nav-item active" onclick="navigate('tab-overview', this)">
                             <svg class="ix-icon" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
                             <span>Performance Overview</span>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item" onclick="navigate('tab-tsc', this)">
+                        <a id="nav-tsc" class="nav-item" onclick="navigate('tab-tsc', this)">
                             <svg class="ix-icon" viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
                             <span>Train Cancellation (TSC)</span>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item" onclick="navigate('tab-tsd', this)">
+                        <a id="nav-tsd" class="nav-item" onclick="navigate('tab-tsd', this)">
                             <svg class="ix-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
                             <span>Train Delay (TSD 2m/5m)</span>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item" onclick="navigate('tab-avail', this)">
+                        <a id="nav-avail" class="nav-item" onclick="navigate('tab-avail', this)">
                             <svg class="ix-icon" viewBox="0 0 24 24"><path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-4-4-8-4zm0 2c3.51 0 4.96.48 5.57 1H6.43c.61-.52 2.06-1 5.57-1zM6 7h5v3H6V7zm12 8.5c0 .83-.67 1.5-1.5 1.5h-9c-.83 0-1.5-.67-1.5-1.5V12h12v3.5zm0-5.5h-5V7h5v3z"/></svg>
                             <span>Fleet & PSD Availability</span>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item" onclick="navigate('tab-ram', this)">
+                        <a id="nav-ram" class="nav-item" onclick="navigate('tab-ram', this)">
                             <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
                             <span>Subsystems RAM Target</span>
                         </a>
@@ -721,139 +765,286 @@
         <!-- WORKSPACE / SIMULATION PANELS -->
         <main class="ix-workspace">
 
-            <!-- TAB 1: OVERVIEW & DASHBOARD -->
+            <!-- TAB 1: OVERVIEW & DASHBOARD (Matches User Screenshot) -->
             <section id="tab-overview" class="tab-view active">
-                <div>
-                    <h1 class="page-title">Executive Performance Dashboard</h1>
-                    <p class="page-subtitle">Real-time simulation status, penalty assessments, and overall compliance against Appendix 6 targets.</p>
-                </div>
 
-                <!-- Scenario Controllers Bar -->
-                <div class="scenario-bar">
-                    <span style="font-size: 13px; font-weight: 700; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
-                        <svg class="ix-icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
-                        Simulate Scenario:
-                    </span>
-                    <button class="scenario-btn" onclick="applyScenario('normal')">
-                        <svg class="ix-icon" style="color: var(--ix-status-success);" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                        Nominal Operations (0% Penalty)
-                    </button>
-                    <button class="scenario-btn" onclick="applyScenario('moderate')">
-                        <svg class="ix-icon" style="color: var(--ix-status-warning);" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-                        Moderate Service Delay
-                    </button>
-                    <button class="scenario-btn" onclick="applyScenario('critical')">
-                        <svg class="ix-icon" style="color: var(--ix-status-danger);" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                        Critical Failure / Cap Breach
-                    </button>
-                    <button class="scenario-btn" onclick="applyScenario('random')">
-                        <svg class="ix-icon" style="color: var(--ix-brand-teal);" viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
-                        Random Statistical Sample
-                    </button>
-                </div>
-
-                <div class="grid-layout-3">
-                    <div class="ix-card">
-                        <div class="card-header">
-                            <span class="card-title">Accumulated Fee Deduction</span>
-                            <span class="ix-badge badge-success" id="badge-total-deduction">0.00% Deducted</span>
-                        </div>
-                        <div style="font-size: 38px; font-weight: 800; color: var(--text-primary); margin-bottom: 6px;" id="val-total-deduction">0.00%</div>
-                        <p style="font-size: 12px; color: var(--text-secondary);">Calculated deduction out of maximum allowable KPI weightings (SMM: 80%, Availability: 20%).</p>
-                        <div class="metric-bar-bg">
-                            <div class="metric-bar-fill" id="bar-total-deduction" style="width: 0%;"></div>
-                        </div>
+                <!-- 1. TOP METRICS ROW -->
+                <div class="metrics-top-grid">
+                    <div class="metric-card-top teal-bar">
+                        <div class="metric-top-label">Service Monitoring</div>
+                        <div class="metric-top-val">80<span>% weight</span></div>
+                        <div class="metric-top-sub">TSC + TSD-2 + TSD-5</div>
                     </div>
-
-                    <div class="ix-card accent-teal">
-                        <div class="card-header">
-                            <span class="card-title">Service Monitoring Measure (SMM)</span>
-                            <span class="ix-badge badge-success">80% Total Weight</span>
-                        </div>
-                        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
-                            Governs <strong>Train Cancellation (TSC)</strong> (16.25%), <strong>2-min Delay</strong> (16.25%), and <strong>5-min Delay</strong> (16.25%) across all M&E systems.
-                        </p>
+                    <div class="metric-card-top blue-bar">
+                        <div class="metric-top-label">Availability Measure</div>
+                        <div class="metric-top-val">20<span>% weight</span></div>
+                        <div class="metric-top-sub">TA + PSDA</div>
                     </div>
-
-                    <div class="ix-card accent-teal">
-                        <div class="card-header">
-                            <span class="card-title">Availability Measure (AM)</span>
-                            <span class="ix-badge badge-success">20% Total Weight</span>
-                        </div>
-                        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
-                            Enforces <strong>Train Availability (TA)</strong> (Target &ge; 99.90%) and <strong>Platform Screen Door Availability (PSDA)</strong> (Target &ge; 99.95%).
-                        </p>
+                    <div class="metric-card-top green-bar">
+                        <div class="metric-top-label">Measurement Period</div>
+                        <div class="metric-top-val" style="font-size: 24px; padding-top: 4px;">Monthly</div>
+                        <div class="metric-top-sub">Per contract spec</div>
+                    </div>
+                    <div class="metric-card-top yellow-bar">
+                        <div class="metric-top-label">Subsystems Tracked</div>
+                        <div class="metric-top-val">6</div>
+                        <div class="metric-top-sub">RST, SIG, COM, PSD, TRK, Overall</div>
                     </div>
                 </div>
 
-                <!-- Comprehensive KPI Table -->
-                <div class="ix-card">
+                <!-- 2. SECTION: NAVIGATE TO A SIMULATOR -->
+                <div class="section-header-nav">
+                    <span>🧭</span> Navigate to a Simulator
+                </div>
+
+                <!-- 3. INTERACTIVE NAVIGATION MENU CARDS (Matching Screenshot Grid) -->
+                <div class="nav-hub-grid">
+                    <!-- Link 1: TSC -->
+                    <div class="hub-link-card" onclick="goToTab('tab-tsc', 'nav-tsc')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: #ff334b;">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Weight: 25.25%</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">Train Service Cancellation (TSC)</div>
+                            <div class="hub-card-desc">Ratio of cancelled train-trips to scheduled trips. Peak &gt;3 min or Off-peak &gt;6 min late = cancelled.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 2: TSD 2m -->
+                    <div class="hub-link-card" onclick="goToTab('tab-tsd', 'nav-tsd')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: #29b6f6;">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Weight: 27.00%</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">2-Minute Train Service Delay</div>
+                            <div class="hub-card-desc">Trips arriving at terminal station exceeding 2 minutes beyond scheduled time.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 3: TSD 5m -->
+                    <div class="hub-link-card" onclick="goToTab('tab-tsd', 'nav-tsd')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: #ab47bc;">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Weight: 27.75%</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">5-Minute Train Service Delay</div>
+                            <div class="hub-card-desc">Trips arriving at terminal station exceeding 5 minutes beyond scheduled time.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 4: Availability -->
+                    <div class="hub-link-card" onclick="goToTab('tab-avail', 'nav-avail')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: var(--ix-status-success);">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Weight: 20.00%</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">Availability (TA & PSDA)</div>
+                            <div class="hub-card-desc">Train Availability and Platform Screen Door Availability during peak and revenue hours.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 5: RAM Targets -->
+                    <div class="hub-link-card" onclick="goToTab('tab-ram', 'nav-ram')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: var(--ix-brand-teal);">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Table A6.2</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">RAM Targets & Simulator</div>
+                            <div class="hub-card-desc">Reliability (MTBF/MDBF), Availability, and Maintainability (MTTR) for all subsystems.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 6: Scenario Dashboard -->
+                    <div class="hub-link-card" onclick="goToTab('tab-overview', 'nav-overview')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: #ff9100;">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Compare</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">Scenario Dashboard</div>
+                            <div class="hub-card-desc">Save, compare, and analyze multiple simulation scenarios side-by-side.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. SECTION: KPI TARGETS SUMMARY — TABLE A6.1 (From Appendix 6) -->
+                <div class="ix-card" style="margin-top: 6px;">
                     <div class="card-header">
-                        <span class="card-title">Summary of Main KPIs & Simulated Output (Table A6.1)</span>
+                        <span class="card-title">
+                            <svg class="ix-icon" style="color: var(--ix-brand-teal);" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+                            TABLE A 6.1: KPIs TO BE MEASURED (Appendix 6 — Conditions of Contract)
+                        </span>
+                        <span class="ix-badge badge-success">Official Contract Specifications</span>
                     </div>
+
                     <div class="ix-table-wrapper">
                         <table class="ix-table">
                             <thead>
                                 <tr>
-                                    <th>Key Performance Indicator</th>
-                                    <th>Weight (W)</th>
-                                    <th>Target</th>
-                                    <th>Performance Cap (PC)</th>
-                                    <th>Simulated Result</th>
-                                    <th>Fee Deduction</th>
-                                    <th>Status</th>
+                                    <th>Title &amp; Subsystem Breakdown</th>
+                                    <th>Weighting (%)</th>
+                                    <th>Target (%)</th>
+                                    <th>Performance Cap (%)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>a) Train Service Cancellation (TSC)</td>
+                                <!-- SMM Main Header -->
+                                <tr class="sub-header">
+                                    <td colspan="4">Service Monitoring Measure (80% Total Weight)</td>
+                                </tr>
+
+                                <!-- a) TSC -->
+                                <tr style="background-color: rgba(0, 153, 153, 0.05); font-weight: 600;">
+                                    <td>a) Train Service Cancellation (TSC) — Overall</td>
                                     <td>16.25%</td>
-                                    <td>&le; 0.80%</td>
+                                    <td>0.80%</td>
                                     <td>1.80%</td>
-                                    <td id="dash-tsc-sim">0.500%</td>
-                                    <td id="dash-tsc-deduct">0.00%</td>
-                                    <td><span class="ix-badge badge-success" id="dash-tsc-badge">Pass</span></td>
                                 </tr>
                                 <tr>
-                                    <td>b) 2 minutes Train Service Delay (TSD 2m)</td>
+                                    <td style="padding-left: 32px;">• Rolling Stock including Depot Workshop Equipment</td>
+                                    <td>3.25%</td>
+                                    <td>0.50%</td>
+                                    <td>1.50%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Signalling</td>
+                                    <td>3.25%</td>
+                                    <td>0.40%</td>
+                                    <td>1.40%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Communication</td>
+                                    <td>1.25%</td>
+                                    <td>0.03%</td>
+                                    <td>1.03%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Platform Screen Door</td>
+                                    <td>0.75%</td>
+                                    <td>0.02%</td>
+                                    <td>1.02%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Trackwork</td>
+                                    <td>1.25%</td>
+                                    <td>0.02%</td>
+                                    <td>1.02%</td>
+                                </tr>
+
+                                <!-- b) TSD 2 mins -->
+                                <tr style="background-color: rgba(0, 153, 153, 0.05); font-weight: 600;">
+                                    <td>b) 2 minutes Train Service Delay (TSD 2m) — Overall</td>
                                     <td>16.25%</td>
-                                    <td>&le; 1.00%</td>
+                                    <td>1.00%</td>
                                     <td>2.00%</td>
-                                    <td id="dash-tsd2-sim">0.800%</td>
-                                    <td id="dash-tsd2-deduct">0.00%</td>
-                                    <td><span class="ix-badge badge-success" id="dash-tsd2-badge">Pass</span></td>
                                 </tr>
                                 <tr>
-                                    <td>c) 5 minutes Train Service Delay (TSD 5m)</td>
+                                    <td style="padding-left: 32px;">• Rolling Stock including Depot Workshop Equipment</td>
+                                    <td>3.25%</td>
+                                    <td>0.55%</td>
+                                    <td>1.55%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Signalling</td>
+                                    <td>4.25%</td>
+                                    <td>0.55%</td>
+                                    <td>1.55%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Communication</td>
+                                    <td>1.25%</td>
+                                    <td>0.10%</td>
+                                    <td>1.10%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Platform Screen Door</td>
+                                    <td>0.75%</td>
+                                    <td>0.20%</td>
+                                    <td>1.20%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Trackwork</td>
+                                    <td>1.25%</td>
+                                    <td>0.10%</td>
+                                    <td>1.10%</td>
+                                </tr>
+
+                                <!-- c) TSD 5 mins -->
+                                <tr style="background-color: rgba(0, 153, 153, 0.05); font-weight: 600;">
+                                    <td>c) 5 minutes Train Service Delay (TSD 5m) — Overall</td>
                                     <td>16.25%</td>
-                                    <td>&le; 0.75%</td>
+                                    <td>0.75%</td>
                                     <td>1.75%</td>
-                                    <td id="dash-tsd5-sim">0.600%</td>
-                                    <td id="dash-tsd5-deduct">0.00%</td>
-                                    <td><span class="ix-badge badge-success" id="dash-tsd5-badge">Pass</span></td>
                                 </tr>
                                 <tr>
-                                    <td>d) Train Availability (TA)</td>
+                                    <td style="padding-left: 32px;">• Rolling Stock including Depot Workshop Equipment</td>
+                                    <td>3.25%</td>
+                                    <td>0.35%</td>
+                                    <td>1.35%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Signalling</td>
+                                    <td>4.25%</td>
+                                    <td>0.35%</td>
+                                    <td>1.35%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Communication</td>
+                                    <td>1.25%</td>
+                                    <td>0.15%</td>
+                                    <td>1.15%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Platform Screen Door</td>
+                                    <td>0.75%</td>
+                                    <td>0.02%</td>
+                                    <td>1.02%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 32px;">• Trackwork</td>
+                                    <td>1.25%</td>
+                                    <td>0.01%</td>
+                                    <td>1.01%</td>
+                                </tr>
+
+                                <!-- Availability Measure Main Header -->
+                                <tr class="sub-header">
+                                    <td colspan="4">Availability Measure (20% Total Weight)</td>
+                                </tr>
+                                <tr>
+                                    <td>• Train Availability (TA)</td>
                                     <td>10.00%</td>
-                                    <td>&ge; 99.90%</td>
+                                    <td>99.90%</td>
                                     <td>98.90%</td>
-                                    <td id="dash-ta-sim">100.000%</td>
-                                    <td id="dash-ta-deduct">0.00%</td>
-                                    <td><span class="ix-badge badge-success" id="dash-ta-badge">Pass</span></td>
                                 </tr>
                                 <tr>
-                                    <td>e) Platform Screen Door Availability (PSDA)</td>
+                                    <td>• Platform Screen Door Availability (PSDA)</td>
                                     <td>10.00%</td>
-                                    <td>&ge; 99.95%</td>
+                                    <td>99.95%</td>
                                     <td>98.95%</td>
-                                    <td id="dash-psda-sim">99.966%</td>
-                                    <td id="dash-psda-deduct">0.00%</td>
-                                    <td><span class="ix-badge badge-success" id="dash-psda-badge">Pass</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </section>
 
             <!-- TAB 2: TRAIN CANCELLATION (TSC) -->
@@ -1159,7 +1350,7 @@
                     <p class="page-subtitle">Clause 2.0 & Table A6.2: Dynamic evaluation of MTBF, MDBF, Availability, and MTTR.</p>
                 </div>
 
-                <!-- Mathematical Formulation & Definitions Display Panel -->
+                <!-- Mathematical Formulation Display Panel -->
                 <div class="ix-card" style="padding: 18px 24px;">
                     <div class="card-header" style="margin-bottom: 10px;">
                         <span class="card-title">
@@ -1168,7 +1359,7 @@
                         </span>
                     </div>
                     <div id="ram-math-formula-box" class="formula-box" style="margin-bottom: 0;">
-                        <!-- Dynamically updated according to selected subsystem -->
+                        <!-- Dynamically updated -->
                     </div>
                 </div>
 
@@ -1245,61 +1436,11 @@
             document.querySelectorAll('.tab-view').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            el.classList.add('active');
-            if (tabId === 'tab-overview') updateOverviewDashboard();
+            if (el) el.classList.add('active');
         }
 
-        // Preset Scenario Applicator
-        function applyScenario(type) {
-            if (type === 'normal') {
-                document.getElementById('in-tsc-s').value = 1200;
-                document.getElementById('in-tsc-c').value = 4;
-                document.getElementById('in-tsd2-s').value = 1200;
-                document.getElementById('in-tsd2-c').value = 8;
-                document.getElementById('in-tsd5-s').value = 1200;
-                document.getElementById('in-tsd5-c').value = 5;
-                document.getElementById('in-ta-pta').value = 18;
-                document.getElementById('in-ta-sta').value = 2;
-                document.getElementById('in-ta-ttr').value = 18;
-                document.getElementById('in-psda-oos').value = 1.2;
-            } else if (type === 'moderate') {
-                document.getElementById('in-tsc-s').value = 1200;
-                document.getElementById('in-tsc-c').value = 12;
-                document.getElementById('in-tsd2-s').value = 1200;
-                document.getElementById('in-tsd2-c').value = 18;
-                document.getElementById('in-tsd5-s').value = 1200;
-                document.getElementById('in-tsd5-c').value = 12;
-                document.getElementById('in-ta-pta').value = 17;
-                document.getElementById('in-ta-sta').value = 2;
-                document.getElementById('in-ta-ttr').value = 18;
-                document.getElementById('in-psda-oos').value = 5.0;
-            } else if (type === 'critical') {
-                document.getElementById('in-tsc-s').value = 1200;
-                document.getElementById('in-tsc-c').value = 25;
-                document.getElementById('in-tsd2-s').value = 1200;
-                document.getElementById('in-tsd2-c').value = 28;
-                document.getElementById('in-tsd5-s').value = 1200;
-                document.getElementById('in-tsd5-c').value = 24;
-                document.getElementById('in-ta-pta').value = 15;
-                document.getElementById('in-ta-sta').value = 1;
-                document.getElementById('in-ta-ttr').value = 18;
-                document.getElementById('in-psda-oos').value = 85.0;
-            } else if (type === 'random') {
-                document.getElementById('in-tsc-s').value = 1200;
-                document.getElementById('in-tsc-c').value = Math.floor(Math.random() * 20);
-                document.getElementById('in-tsd2-s').value = 1200;
-                document.getElementById('in-tsd2-c').value = Math.floor(Math.random() * 25);
-                document.getElementById('in-tsd5-s').value = 1200;
-                document.getElementById('in-tsd5-c').value = Math.floor(Math.random() * 18);
-                document.getElementById('in-ta-pta').value = 16 + Math.floor(Math.random() * 3);
-                document.getElementById('in-ta-sta').value = 2;
-                document.getElementById('in-ta-ttr').value = 18;
-                document.getElementById('in-psda-oos').value = (Math.random() * 10).toFixed(1);
-            }
-
-            runSimTSC();
-            runSimTSD();
-            runSimAvail();
+        function goToTab(tabId, navId) {
+            navigate(tabId, document.getElementById(navId));
         }
 
         // SIMULATION 1: Train Service Cancellation (TSC)
@@ -1320,7 +1461,6 @@
             const deductElem = document.getElementById('res-tsc-deduct');
             deductElem.innerText = deduction.toFixed(2) + '%';
             deductElem.className = deduction > 0 ? "result-val danger" : "result-val success";
-            updateOverviewDashboard();
         }
 
         // SIMULATION 2: Train Service Delay (TSD)
@@ -1360,8 +1500,6 @@
             elem5.className = d5 > 0 ? "result-val danger" : "result-val success";
             document.getElementById('badge-tsd5').className = rate5 <= t5 ? "ix-badge badge-success" : "ix-badge badge-danger";
             document.getElementById('badge-tsd5').innerText = rate5 <= t5 ? "Compliant" : "Breached";
-
-            updateOverviewDashboard();
         }
 
         // SIMULATION 3: Fleet & PSD Availability
@@ -1402,54 +1540,6 @@
             const elemPSDA = document.getElementById('res-psda-deduct');
             elemPSDA.innerText = dPSDA.toFixed(2) + '%';
             elemPSDA.className = dPSDA > 0 ? "result-val danger" : "result-val success";
-
-            updateOverviewDashboard();
-        }
-
-        // UPDATE EXECUTIVE DASHBOARD
-        function updateOverviewDashboard() {
-            document.getElementById('dash-tsc-sim').innerText = appState.tsc.toFixed(3) + '%';
-            document.getElementById('dash-tsc-deduct').innerText = appState.tscDeduct.toFixed(2) + '%';
-            setDashBadge('dash-tsc-badge', appState.tsc <= 0.80);
-
-            document.getElementById('dash-tsd2-sim').innerText = appState.tsd2.toFixed(3) + '%';
-            document.getElementById('dash-tsd2-deduct').innerText = appState.tsd2Deduct.toFixed(2) + '%';
-            setDashBadge('dash-tsd2-badge', appState.tsd2 <= 1.00);
-
-            document.getElementById('dash-tsd5-sim').innerText = appState.tsd5.toFixed(3) + '%';
-            document.getElementById('dash-tsd5-deduct').innerText = appState.tsd5Deduct.toFixed(2) + '%';
-            setDashBadge('dash-tsd5-badge', appState.tsd5 <= 0.75);
-
-            document.getElementById('dash-ta-sim').innerText = appState.ta.toFixed(3) + '%';
-            document.getElementById('dash-ta-deduct').innerText = appState.taDeduct.toFixed(2) + '%';
-            setDashBadge('dash-ta-badge', appState.ta >= 99.90);
-
-            document.getElementById('dash-psda-sim').innerText = appState.psda.toFixed(4) + '%';
-            document.getElementById('dash-psda-deduct').innerText = appState.psdaDeduct.toFixed(2) + '%';
-            setDashBadge('dash-psda-badge', appState.psda >= 99.95);
-
-            const totalPenalty = appState.tscDeduct + appState.tsd2Deduct + appState.tsd5Deduct + appState.taDeduct + appState.psdaDeduct;
-            document.getElementById('val-total-deduction').innerText = totalPenalty.toFixed(2) + '%';
-
-            const badge = document.getElementById('badge-total-deduction');
-            const bar = document.getElementById('bar-total-deduction');
-            if (totalPenalty > 0) {
-                badge.innerText = "Penalty Active";
-                badge.className = "ix-badge badge-danger";
-                bar.style.backgroundColor = "var(--ix-status-danger)";
-                bar.style.width = Math.min(100, (totalPenalty / 68.75) * 100) + '%';
-            } else {
-                badge.innerText = "0.00% Deducted";
-                badge.className = "ix-badge badge-success";
-                bar.style.backgroundColor = "var(--ix-brand-teal)";
-                bar.style.width = '0%';
-            }
-        }
-
-        function setDashBadge(id, isPass) {
-            const el = document.getElementById(id);
-            el.innerText = isPass ? "Pass" : "Breached";
-            el.className = isPass ? "ix-badge badge-success" : "ix-badge badge-danger";
         }
 
         // DYNAMIC RAM CONFIGURATOR & FORMULA DICTIONARY
@@ -1599,7 +1689,6 @@
             const container = document.getElementById('ram-dynamic-inputs');
             const formulaBox = document.getElementById('ram-math-formula-box');
 
-            // Render math formula
             formulaBox.innerHTML = `
                 <div class="formula-header">
                     <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
@@ -1650,8 +1739,7 @@
             };
 
             const makeSectionHeader = (title) => `
-                <div class="result-section-title">
-                    <svg class="ix-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ix-brand-petrol); margin: 12px 0 6px 0; border-bottom: 1px solid rgba(0, 153, 153, 0.2); padding-bottom: 4px;">
                     ${title}
                 </div>
             `;
@@ -1662,7 +1750,7 @@
                 const rep = parseFloat(document.getElementById('ram_btn_repair').value) || 0;
                 const f_less = parseFloat(document.getElementById('ram_btn_f_less5').value) || 0;
                 const f_more = parseFloat(document.getElementById('ram_btn_f_more5').value) || 0;
-                
+
                 const totalHours = nodes * 24 * 30;
                 const inServiceHours = totalHours - oos;
                 const avail = (inServiceHours / totalHours) * 100;
@@ -1711,7 +1799,7 @@
                 const pid_t = parseFloat(document.getElementById('ram_pis_repair_time_pid').value) || 0;
                 const disrupt = parseFloat(document.getElementById('ram_pis_disruptions').value) || 0;
 
-                const totalOpHours = 24 * 30 * 17; // 17 stations
+                const totalOpHours = 24 * 30 * 17;
                 const pa_avail = ((totalOpHours - pa_oos) / totalOpHours) * 100;
                 const pid_avail = ((totalOpHours - pid_oos) / totalOpHours) * 100;
                 const pa_mttr = pa_t / (pa_r || 1);
@@ -1835,7 +1923,6 @@
                 out += makeRow("Point Machine Whole Replacement", pm_t.toFixed(1) + " hrs", "≤ 3.0 hours", pm_t <= 3.0);
             }
 
-            // Update badge & summary
             if (isAllCompliant) {
                 badge.innerText = "ALL TARGETS MET";
                 badge.className = "ix-badge badge-success";
