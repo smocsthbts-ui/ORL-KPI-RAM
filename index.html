@@ -386,13 +386,19 @@
 
         .nav-hub-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
         }
 
         @media (max-width: 1200px) {
             .nav-hub-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-hub-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -755,16 +761,34 @@
                         </a>
                     </li>
                     <li>
+                        <a id="nav-rel" class="nav-item" onclick="navigate('tab-reliability', this)">
+                            <svg class="ix-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <span>Reliability (R)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="nav-avl" class="nav-item" onclick="navigate('tab-availability2', this)">
+                            <svg class="ix-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            <span>Availability (A)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="nav-mnt" class="nav-item" onclick="navigate('tab-maintain', this)">
+                            <svg class="ix-icon" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+                            <span>Maintainability (M)</span>
+                        </a>
+                    </li>
+                    <li>
                         <a id="nav-scenario" class="nav-item" onclick="navigate('tab-scenario', this)">
                             <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
                             <span>Scenario Dashboard</span>
                         </a>
-                    </li>
+                    
                 </ul>
             </div>
             <div class="sidebar-footer">
                 <div>Document: <strong>Conditions of Contract</strong></div>
-                <div style="margin-top: 4px;">Appendix 6</div>
+                <div style="margin-top: 4px;">Appendix 6 — Page 1 to 33</div>
             </div>
         </aside>
 
@@ -876,6 +900,48 @@
                     </div>
 
                     <!-- Link 6: Scenario Dashboard -->
+                    <div class="hub-link-card" onclick="goToTab('tab-reliability', 'nav-rel')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: #66bb6a;">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Section 2.4</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">Reliability (R) Simulator</div>
+                            <div class="hub-card-desc">MTBF / MDBF / MCBF calculators for COM, DWE, PSD, RST, and SIG subsystems.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 8: Availability (A) -->
+                    <div class="hub-link-card" onclick="goToTab('tab-availability2', 'nav-avl')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: #42a5f5;">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Section 2.5</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">Availability (A) Simulator</div>
+                            <div class="hub-card-desc">Availability (%) calculators for 20 subsystems — COM, DWE, and SIG.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 9: Maintainability (M) -->
+                    <div class="hub-link-card" onclick="goToTab('tab-maintain', 'nav-mnt')">
+                        <div class="hub-card-header">
+                            <div class="hub-icon-circle" style="color: #ef5350;">
+                                <svg class="ix-icon" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+                            </div>
+                            <span class="hub-badge-pill">Section 2.6</span>
+                        </div>
+                        <div>
+                            <div class="hub-card-title">Maintainability (M) Simulator</div>
+                            <div class="hub-card-desc">MTTR calculators for 15 subsystems — COM, DWE, PSD, RST, and SIG.</div>
+                        </div>
+                    </div>
+
+                    <!-- Link 10: Scenario Dashboard -->
                     <div class="hub-link-card" onclick="goToTab('tab-scenario', 'nav-scenario')">
                         <div class="hub-card-header">
                             <div class="hub-icon-circle" style="color: #ff9100;">
@@ -1410,87 +1476,89 @@
             </section>
 
         
-            <!-- TAB 6: SCENARIO DASHBOARD — Save, Compare & Analyze -->
+            <!-- TAB 6: SCENARIO DASHBOARD -->
             <section id="tab-scenario" class="tab-view">
-                <div>
-                    <h1 class="page-title">Scenario Dashboard</h1>
-                    <p class="page-subtitle">Save, compare, and analyze multiple simulation scenarios side-by-side.</p>
-                </div>
-
-                <!-- Save Current Scenario -->
-                <div class="ix-card" style="margin-bottom: 16px;">
-                    <div class="card-header">
-                        <span class="card-title">
-                            <svg class="ix-icon" style="color: var(--ix-brand-teal);" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
-                            Capture Current Simulation State
-                        </span>
-                        <span class="ix-badge badge-success" id="scenario-count-badge">0 Scenarios Saved</span>
-                    </div>
-                    <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
-                        <div class="form-group" style="flex: 1; min-width: 220px; margin-bottom: 0;">
-                            <label class="form-label" for="scenario-name-input">Scenario Name</label>
-                            <input type="text" id="scenario-name-input" class="ix-input" placeholder="e.g. Baseline Q1, Worst Case, Optimistic..." style="width: 100%;">
-                        </div>
-                        <div class="form-group" style="flex: 1; min-width: 220px; margin-bottom: 0;">
-                            <label class="form-label" for="scenario-notes-input">Notes (optional)</label>
-                            <input type="text" id="scenario-notes-input" class="ix-input" placeholder="Brief description or context..." style="width: 100%;">
-                        </div>
-                        <button class="ix-btn" onclick="saveScenario()" style="background: var(--ix-brand-teal); color: #fff; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-weight: 600; height: 40px; white-space: nowrap;">
-                            <svg class="ix-icon" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;fill:currentColor;"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
-                            Save Scenario
-                        </button>
-                        <button class="ix-btn" onclick="exportScenariosCSV()" style="background: transparent; color: var(--ix-brand-petrol); border: 1px solid var(--ix-brand-petrol); padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: 600; height: 40px; white-space: nowrap;">
-                            <svg class="ix-icon" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                            Export CSV
-                        </button>
+                <div><h1 class="page-title">Scenario Dashboard</h1><p class="page-subtitle">Save, compare, and analyze multiple simulation scenarios side-by-side.</p></div>
+                <div class="ix-card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">Capture Current Simulation State</span><span class="ix-badge badge-success" id="scenario-count-badge">0 Scenarios Saved</span></div>
+                    <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+                        <div class="form-group" style="flex:1;min-width:220px;margin-bottom:0;"><label class="form-label" for="scenario-name-input">Scenario Name</label><input type="text" id="scenario-name-input" class="ix-input" placeholder="e.g. Baseline Q1, Worst Case..." style="width:100%;"></div>
+                        <div class="form-group" style="flex:1;min-width:220px;margin-bottom:0;"><label class="form-label" for="scenario-notes-input">Notes (optional)</label><input type="text" id="scenario-notes-input" class="ix-input" placeholder="Brief description..." style="width:100%;"></div>
+                        <button class="ix-btn" onclick="saveScenario()" style="background:var(--ix-brand-teal);color:#fff;border:none;padding:10px 24px;border-radius:4px;cursor:pointer;font-weight:600;height:40px;">Save Scenario</button>
+                        <button class="ix-btn" onclick="exportScenariosCSV()" style="background:transparent;color:var(--ix-brand-petrol);border:1px solid var(--ix-brand-petrol);padding:10px 18px;border-radius:4px;cursor:pointer;font-weight:600;height:40px;">Export CSV</button>
                     </div>
                 </div>
-
-                <!-- Comparison Table -->
-                <div class="ix-card" style="margin-bottom: 16px;">
-                    <div class="card-header">
-                        <span class="card-title">
-                            <svg class="ix-icon" style="color: #ff9100;" viewBox="0 0 24 24"><path d="M10 3H4a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1zm10 0h-6a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1zM10 13H4a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-6a1 1 0 00-1-1zm10 0h-6a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-6a1 1 0 00-1-1z"/></svg>
-                            Side-by-Side Comparison
-                        </span>
-                    </div>
-                    <div id="scenario-empty-state" style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
-                        <svg viewBox="0 0 24 24" style="width: 48px; height: 48px; fill: var(--text-muted); opacity: 0.3; margin-bottom: 12px;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">No Scenarios Saved Yet</div>
-                        <div style="font-size: 13px;">Go to any simulator tab (TSC, TSD, Availability), configure your inputs, then return here and click <strong>"Save Scenario"</strong> to capture the current state.</div>
-                    </div>
-                    <div id="scenario-table-container" style="display: none;">
-                        <div class="ix-table-wrapper">
-                            <table class="ix-table" id="scenario-compare-table">
-                                <thead>
-                                    <tr id="scenario-table-header">
-                                        <th style="min-width: 200px;">KPI Metric</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="scenario-table-body">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="ix-card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">Side-by-Side Comparison</span></div>
+                    <div id="scenario-empty-state" style="text-align:center;padding:48px 20px;color:var(--text-muted);"><div style="font-size:15px;font-weight:600;margin-bottom:6px;">No Scenarios Saved Yet</div><div style="font-size:13px;">Configure simulators then return here and click <strong>"Save Scenario"</strong>.</div></div>
+                    <div id="scenario-table-container" style="display:none;"><div class="ix-table-wrapper"><table class="ix-table" id="scenario-compare-table"><thead><tr id="scenario-table-header"><th style="min-width:200px;">KPI Metric</th></tr></thead><tbody id="scenario-table-body"></tbody></table></div></div>
                 </div>
-
-                <!-- Visual Bar Chart Comparison -->
                 <div class="ix-card">
-                    <div class="card-header">
-                        <span class="card-title">
-                            <svg class="ix-icon" style="color: var(--ix-brand-petrol);" viewBox="0 0 24 24"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg>
-                            Fee Deduction Comparison Chart
-                        </span>
-                    </div>
-                    <div id="scenario-chart-empty" style="text-align: center; padding: 36px 20px; color: var(--text-muted);">
-                        <div style="font-size: 13px;">Save at least one scenario to see the visual comparison chart.</div>
-                    </div>
-                    <div id="scenario-chart-container" style="display: none; padding: 16px 0;">
-                        <div style="display: flex; align-items: flex-end; gap: 6px; justify-content: center; min-height: 220px; padding: 0 20px;" id="scenario-bar-chart"></div>
-                        <div style="display: flex; gap: 6px; justify-content: center; margin-top: 8px; flex-wrap: wrap;" id="scenario-chart-legend"></div>
+                    <div class="card-header"><span class="card-title">Fee Deduction Comparison Chart</span></div>
+                    <div id="scenario-chart-empty" style="text-align:center;padding:36px 20px;color:var(--text-muted);">Save at least one scenario to see the chart.</div>
+                    <div id="scenario-chart-container" style="display:none;padding:16px 0;"><div style="display:flex;align-items:flex-end;gap:6px;justify-content:center;min-height:220px;padding:0 20px;" id="scenario-bar-chart"></div><div style="display:flex;gap:6px;justify-content:center;margin-top:8px;flex-wrap:wrap;" id="scenario-chart-legend"></div></div>
+                </div>
+            </section>
+
+            <!-- TAB 7: RELIABILITY -->
+            <section id="tab-reliability" class="tab-view">
+                <div><h1 class="page-title">Reliability Measure (MTBF / MDBF / MCBF)</h1><p class="page-subtitle">Section 2.4 — Reliability is measured based on time/distance/cycle of equipment operation without failure.</p></div>
+                <div class="ix-card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">Select Subsystem</span></div>
+                    <div class="form-group"><label class="form-label" for="sel-rel-sys">Reliability Subsystem</label>
+                        <select id="sel-rel-sys" class="ix-select" onchange="renderRelInputs()">
+                            <optgroup label="2.4.1 Communication System (COM)"><option value="rel_btn">a) Backbone Transmission Network (BTN)</option><option value="rel_drs">b) Digital Radio System (DRS)</option><option value="rel_pis">c) Passenger Information System (PIS)</option><option value="rel_tcs">d) Train Communication System (TCS)</option></optgroup>
+                            <optgroup label="2.4.2 Depot Workshop Equipment (DWE)"><option value="rel_rmv">a) Rail Maintenance Vehicle</option><option value="rel_twh">b) Train Wash &amp; Harvesting System</option></optgroup>
+                            <optgroup label="2.4.3 Platform Screen Door"><option value="rel_psd">PSD Reliability</option></optgroup>
+                            <optgroup label="2.4.4 Rolling Stock"><option value="rel_rst">RST Reliability (MDTF)</option></optgroup>
+                            <optgroup label="2.4.5 Signalling (SIG)"><option value="rel_sig_train">a) SIG on Train</option><option value="rel_sig_entire">b) Entire SIG System</option><option value="rel_sig_pm">c) Turnout Point Machine</option></optgroup>
+                        </select>
                     </div>
                 </div>
+                <div class="grid-layout-2">
+                    <div class="ix-card"><div class="card-header"><span class="card-title">Simulator Inputs</span></div><div id="rel-dynamic-inputs"></div><div style="margin-top:12px;"><button class="ix-btn" onclick="computeReliability()" style="background:var(--ix-brand-teal);color:#fff;border:none;padding:10px 24px;border-radius:4px;cursor:pointer;font-weight:600;width:100%;">Calculate Reliability</button></div></div>
+                    <div class="ix-card"><div class="card-header"><span class="card-title">Reliability Results</span><span class="ix-badge badge-success" id="rel-summary-badge">Awaiting Calculation</span></div><div id="rel-formula-box" class="formula-box" style="margin-bottom:12px;"></div><div class="result-panel" id="rel-report-output"><div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">Select a subsystem and click "Calculate Reliability" to see results.</div></div></div>
+                </div>
+            </section>
 
+            <!-- TAB 8: AVAILABILITY -->
+            <section id="tab-availability2" class="tab-view">
+                <div><h1 class="page-title">Availability Measure (%)</h1><p class="page-subtitle">Section 2.5 — Availability (%) = (Hours in Service / Operating Hours) &times; 100</p></div>
+                <div class="ix-card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">Select Subsystem</span></div>
+                    <div class="form-group"><label class="form-label" for="sel-avl-sys">Availability Subsystem</label>
+                        <select id="sel-avl-sys" class="ix-select" onchange="renderAvlInputs()">
+                            <optgroup label="2.5.1 Communication System (COM)"><option value="avl_btn_node">a-i) BTN Node (&ge;99.9%)</option><option value="avl_btn_eth">a-ii) Ethernet Switch (&ge;99.99%)</option><option value="avl_bbrs_sta">b-i) BBRS Station (&ge;99.95%)</option><option value="avl_bbrs_train">b-ii) BBRS on Train (&ge;99.67%)</option><option value="avl_cass">c) CASS (&ge;99.99%)</option><option value="avl_cctv">d) CCTV Recording (&ge;99.99%)</option><option value="avl_drs">e) DRS (&ge;99.9%)</option><option value="avl_it">f) IT (&ge;99.99%)</option><option value="avl_mcs">g) MCS (&ge;99.95%)</option><option value="avl_pa_sys">h-i) PA System Overall (&ge;99.95%)</option><option value="avl_pa_equip">h-ii) PA Equipment (&ge;99.70%)</option><option value="avl_pid_train">h-iii) PID on Train (&ge;98.50%)</option><option value="avl_pid_sta">h-iv) PID on Station (&ge;99.50%)</option><option value="avl_tel">h-v) TEL System (&ge;99.95%)</option><option value="avl_tel_pabx">h-v) Main PABX (&ge;99.90%)</option><option value="avl_tel_sat">h-v) Satellite PABX (&ge;99.95%)</option></optgroup>
+                            <optgroup label="2.5.2 Depot Workshop Equipment"><option value="avl_dwe_grind">i-i) Rail Head Grinding Vehicle (&ge;98.0%)</option><option value="avl_dwe_wash">i-ii) Train Wash &amp; Harvesting (&ge;98.0%)</option><option value="avl_dwe_lathe">i-iii) Wheel Lathe Machine (&ge;98.0%)</option></optgroup>
+                            <optgroup label="2.5.3 Signalling"><option value="avl_sig_onboard">j) SIG On-board System (&ge;99.99%)</option></optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-layout-2">
+                    <div class="ix-card"><div class="card-header"><span class="card-title">Simulator Inputs</span></div><div id="avl-dynamic-inputs"></div><div style="margin-top:12px;"><button class="ix-btn" onclick="computeAvailability()" style="background:var(--ix-brand-teal);color:#fff;border:none;padding:10px 24px;border-radius:4px;cursor:pointer;font-weight:600;width:100%;">Calculate Availability</button></div></div>
+                    <div class="ix-card"><div class="card-header"><span class="card-title">Availability Results</span><span class="ix-badge badge-success" id="avl-summary-badge">Awaiting Calculation</span></div><div id="avl-formula-box" class="formula-box" style="margin-bottom:12px;"></div><div class="result-panel" id="avl-report-output"><div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">Select a subsystem and click "Calculate Availability" to see results.</div></div></div>
+                </div>
+            </section>
+
+            <!-- TAB 9: MAINTAINABILITY -->
+            <section id="tab-maintain" class="tab-view">
+                <div><h1 class="page-title">Maintainability Measure (MTTR)</h1><p class="page-subtitle">Section 2.6 — MTTR = Total time spent on repairs / Number of repairs</p></div>
+                <div class="ix-card" style="margin-bottom:16px;">
+                    <div class="card-header"><span class="card-title">Select Subsystem</span></div>
+                    <div class="form-group"><label class="form-label" for="sel-mnt-sys">Maintainability Subsystem</label>
+                        <select id="sel-mnt-sys" class="ix-select" onchange="renderMntInputs()">
+                            <optgroup label="2.6.1 Communication System (COM)"><option value="mnt_btn">a) BTN System (MTTR &le;0.5 hrs)</option><option value="mnt_cass">b) CASS System (MTTR &le;3 hrs)</option><option value="mnt_cctv">c) CCTV System (MTTR &le;3 hrs)</option><option value="mnt_drs">d) DRS (MTTR &le;3 hrs)</option><option value="mnt_it">e) IT System (MTTR &le;3 hrs)</option><option value="mnt_mcs">f) MCS (MTTR &le;3 hrs)</option><option value="mnt_pis">g) PIS — PA &amp; PID (MTTR &le;3 hrs)</option><option value="mnt_tel">h) TEL System (MTTR &le;3 hrs)</option></optgroup>
+                            <optgroup label="2.6.2 Depot Workshop Equipment (DWE)"><option value="mnt_dwe_veh">a) Rail Maintenance Vehicles (MTTR &le;12 hrs)</option><option value="mnt_dwe_wash">b) Train Wash &amp; Harvesting (MTTR &le;24 hrs)</option><option value="mnt_dwe_equip">c) Maintenance Equipment (MTTR &le;72 hrs)</option></optgroup>
+                            <optgroup label="2.6.3 PSD"><option value="mnt_psd">PSD System (MTTR &le;0.5 hrs)</option></optgroup>
+                            <optgroup label="2.6.4 Rolling Stock (RST)"><option value="mnt_rst_lru">a) LRU Replacement (MTTR &le;30 mins)</option><option value="mnt_rst_bogie">b) Bogie Replacement (MTTR &le;2 hrs)</option><option value="mnt_rst_major">c) Major Unit Replacement (MTTR &le;3 hrs)</option></optgroup>
+                            <optgroup label="2.6.5 Signalling (SIG)"><option value="mnt_sig_elec">a) Electronic Parts (MTTR &le;0.5 hrs)</option><option value="mnt_sig_pm">b) Point Machine System (MTTR &le;3 hrs)</option></optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-layout-2">
+                    <div class="ix-card"><div class="card-header"><span class="card-title">Simulator Inputs</span></div><div id="mnt-dynamic-inputs"></div><div style="margin-top:12px;"><button class="ix-btn" onclick="computeMaintainability()" style="background:var(--ix-brand-teal);color:#fff;border:none;padding:10px 24px;border-radius:4px;cursor:pointer;font-weight:600;width:100%;">Calculate Maintainability</button></div></div>
+                    <div class="ix-card"><div class="card-header"><span class="card-title">Maintainability Results</span><span class="ix-badge badge-success" id="mnt-summary-badge">Awaiting Calculation</span></div><div id="mnt-formula-box" class="formula-box" style="margin-bottom:12px;"></div><div class="result-panel" id="mnt-report-output"><div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">Select a subsystem and click "Calculate Maintainability" to see results.</div></div></div>
+                </div>
             </section>
 
         </main>
@@ -2025,230 +2093,270 @@
         }
 
         // Bootstrap on Load
+        
+        // ===== SCENARIO DASHBOARD ENGINE =====
+        const savedScenarios = [];
+        const scenarioColors = ['#009999','#ff9100','#e6007e','#00b0f0','#7b61ff','#00c853','#ff5252','#ffd600'];
+
+        function captureCurrentState() {
+            return {
+                tscRate: appState.tsc, tscDeduct: appState.tscDeduct,
+                tsd2Rate: appState.tsd2, tsd2Deduct: appState.tsd2Deduct,
+                tsd5Rate: appState.tsd5, tsd5Deduct: appState.tsd5Deduct,
+                taRate: appState.ta, taDeduct: appState.taDeduct,
+                psdaRate: appState.psda, psdaDeduct: appState.psdaDeduct,
+                totalDeduct: appState.tscDeduct + appState.tsd2Deduct + appState.tsd5Deduct + appState.taDeduct + appState.psdaDeduct
+            };
+        }
+        function saveScenario() {
+            const nameInput = document.getElementById('scenario-name-input');
+            const notesInput = document.getElementById('scenario-notes-input');
+            let name = nameInput.value.trim() || ('Scenario ' + (savedScenarios.length + 1));
+            const state = captureCurrentState();
+            state.name = name; state.notes = notesInput.value.trim();
+            state.timestamp = new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+            state.color = scenarioColors[savedScenarios.length % scenarioColors.length];
+            savedScenarios.push(state);
+            nameInput.value = ''; notesInput.value = '';
+            renderScenarioDashboard();
+        }
+        function deleteScenario(i) { savedScenarios.splice(i,1); savedScenarios.forEach((s,j)=>{s.color=scenarioColors[j%scenarioColors.length];}); renderScenarioDashboard(); }
+        function renderScenarioDashboard() {
+            const n = savedScenarios.length;
+            document.getElementById('scenario-count-badge').innerText = n + ' Scenario' + (n!==1?'s':'') + ' Saved';
+            if(n===0){document.getElementById('scenario-empty-state').style.display='block';document.getElementById('scenario-table-container').style.display='none';document.getElementById('scenario-chart-empty').style.display='block';document.getElementById('scenario-chart-container').style.display='none';return;}
+            document.getElementById('scenario-empty-state').style.display='none';document.getElementById('scenario-table-container').style.display='block';document.getElementById('scenario-chart-empty').style.display='none';document.getElementById('scenario-chart-container').style.display='block';
+            let hdr='<th style="min-width:200px;">KPI Metric</th>';
+            savedScenarios.forEach((s,i)=>{hdr+='<th><div style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;border-radius:50%;background:'+s.color+';display:inline-block;"></span>'+s.name+'</div><div style="font-size:10px;color:var(--text-muted);">'+s.timestamp+'</div><div style="margin-top:4px;"><button onclick="deleteScenario('+i+')" style="font-size:10px;padding:2px 8px;border:1px solid var(--ix-status-alarm);background:transparent;color:var(--ix-status-alarm);border-radius:3px;cursor:pointer;">Delete</button></div></th>';});
+            document.getElementById('scenario-table-header').innerHTML=hdr;
+            const metrics=[{l:'TSC Rate',k:'tscRate',f:function(v){return v.toFixed(3)+'%';},t:'\u2264 0.80%',c:function(v){return v<=0.80;}},{l:'TSC Deduction',k:'tscDeduct',f:function(v){return v.toFixed(2)+'%';},t:'0%',c:function(v){return v===0;}},{l:'TSD 2m Rate',k:'tsd2Rate',f:function(v){return v.toFixed(3)+'%';},t:'\u2264 1.00%',c:function(v){return v<=1.00;}},{l:'TSD 2m Deduction',k:'tsd2Deduct',f:function(v){return v.toFixed(2)+'%';},t:'0%',c:function(v){return v===0;}},{l:'TSD 5m Rate',k:'tsd5Rate',f:function(v){return v.toFixed(3)+'%';},t:'\u2264 0.75%',c:function(v){return v<=0.75;}},{l:'TSD 5m Deduction',k:'tsd5Deduct',f:function(v){return v.toFixed(2)+'%';},t:'0%',c:function(v){return v===0;}},{l:'Train Availability',k:'taRate',f:function(v){return v.toFixed(3)+'%';},t:'\u2265 99.90%',c:function(v){return v>=99.90;}},{l:'TA Deduction',k:'taDeduct',f:function(v){return v.toFixed(2)+'%';},t:'0%',c:function(v){return v===0;}},{l:'PSDA Rate',k:'psdaRate',f:function(v){return v.toFixed(4)+'%';},t:'\u2265 99.95%',c:function(v){return v>=99.95;}},{l:'PSDA Deduction',k:'psdaDeduct',f:function(v){return v.toFixed(2)+'%';},t:'0%',c:function(v){return v===0;}},{l:'TOTAL DEDUCTION',k:'totalDeduct',f:function(v){return v.toFixed(2)+'%';},t:'0%',c:function(v){return v===0;},b:true}];
+            let body='';metrics.forEach(function(m){let rs=m.b?' style="background:rgba(0,153,153,0.06);font-weight:700;"':'';body+='<tr'+rs+'><td>'+m.l+'<br><small style="color:var(--text-muted);">Target: '+m.t+'</small></td>';savedScenarios.forEach(function(s){const v=s[m.k];body+='<td><span class="result-val '+(m.c(v)?'success':'danger')+'">'+m.f(v)+'</span></td>';});body+='</tr>';});
+            document.getElementById('scenario-table-body').innerHTML=body;
+            const dk=[{k:'tscDeduct',l:'TSC'},{k:'tsd2Deduct',l:'TSD2m'},{k:'tsd5Deduct',l:'TSD5m'},{k:'taDeduct',l:'TA'},{k:'psdaDeduct',l:'PSDA'},{k:'totalDeduct',l:'TOTAL'}];
+            let mx=1;savedScenarios.forEach(function(s){dk.forEach(function(d){if(s[d.k]>mx)mx=s[d.k];});});mx=Math.ceil(mx*1.2)||1;
+            let ch='';dk.forEach(function(d){ch+='<div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="display:flex;align-items:flex-end;gap:3px;height:180px;">';savedScenarios.forEach(function(s){const v=s[d.k];const h=Math.max(2,(v/mx)*160);ch+='<div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:var(--text-muted);">'+v.toFixed(1)+'%</span><div style="width:18px;height:'+h+'px;background:'+s.color+';border-radius:3px 3px 0 0;" title="'+s.name+': '+v.toFixed(2)+'%"></div></div>';});ch+='</div><div style="font-size:10px;font-weight:600;color:var(--text-primary);margin-top:4px;padding-top:4px;border-top:1px solid var(--border-subtle);">'+d.l+'</div></div>';});
+            document.getElementById('scenario-bar-chart').innerHTML=ch;
+            let lg='';savedScenarios.forEach(function(s){lg+='<div style="display:flex;align-items:center;gap:4px;font-size:11px;"><span style="width:10px;height:10px;border-radius:50%;background:'+s.color+';display:inline-block;"></span>'+s.name+'</div>';});
+            document.getElementById('scenario-chart-legend').innerHTML=lg;
+        }
+        function exportScenariosCSV(){if(!savedScenarios.length){alert('No scenarios.');return;}let csv='Name,Notes,Time,TSC%,TSCDed%,TSD2m%,TSD2mDed%,TSD5m%,TSD5mDed%,TA%,TADed%,PSDA%,PSDADed%,TotalDed%\n';savedScenarios.forEach(function(s){csv+=['"'+s.name+'"','"'+(s.notes||'')+'"','"'+s.timestamp+'"',s.tscRate.toFixed(3),s.tscDeduct.toFixed(2),s.tsd2Rate.toFixed(3),s.tsd2Deduct.toFixed(2),s.tsd5Rate.toFixed(3),s.tsd5Deduct.toFixed(2),s.taRate.toFixed(3),s.taDeduct.toFixed(2),s.psdaRate.toFixed(4),s.psdaDeduct.toFixed(2),s.totalDeduct.toFixed(2)].join(',')+'\n';});const b=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='Scenarios_'+new Date().toISOString().slice(0,10)+'.csv';a.click();}
+
+        // ===== GENERIC RENDER & COMPUTE HELPERS =====
+        function renderDynamicFields(containerId, fields) {
+            let html = '';
+            fields.forEach(function(f) {
+                html += '<div class="form-group"><label class="form-label" for="'+f.id+'">'+f.label+'</label><div class="input-group"><input type="number" id="'+f.id+'" class="ix-input" value="'+f.val+'" step="any"><div class="input-addon">'+f.unit+'</div></div></div>';
+            });
+            document.getElementById(containerId).innerHTML = html;
+        }
+        function getFieldValues(fields) {
+            var v = {};
+            fields.forEach(function(f) { v[f.id] = parseFloat(document.getElementById(f.id).value) || 0; });
+            return v;
+        }
+        function renderResults(containerId, badgeId, formulaBoxId, schema, results) {
+            var fb = document.getElementById(formulaBoxId);
+            var formulaText = schema.formula || 'MTTR = Total Repair Time / Number of Repairs';
+            fb.innerHTML = '<div class="formula-header"><svg class="ix-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg> '+schema.title+'</div><div class="formula-content"><div class="formula-item" style="color:var(--text-muted);font-size:12px;margin-bottom:6px;">'+schema.desc+'</div><div class="formula-item">'+formulaText+'</div></div>';
+            var allPass = true;
+            var html = '';
+            results.forEach(function(r) {
+                if (r.target && !r.pass) allPass = false;
+                var cls = r.target ? (r.pass ? 'success' : 'danger') : '';
+                var badge = r.target ? '<span class="ix-badge '+(r.pass ? 'badge-success' : 'badge-danger')+'">'+(r.pass ? 'PASS' : 'BREACH')+'</span>' : '';
+                html += '<div class="result-row"><div><span style="font-weight:500;">'+r.label+'</span>'+(r.target ? '<br><small style="color:var(--text-muted);">Target: '+r.target+'</small>' : '')+'</div><div style="display:flex;align-items:center;gap:8px;"><span class="result-val '+cls+'">'+r.value+'</span>'+badge+'</div></div>';
+            });
+            document.getElementById(containerId).innerHTML = html;
+            var b = document.getElementById(badgeId);
+            b.innerText = allPass ? 'ALL TARGETS MET' : 'TARGET BREACH DETECTED';
+            b.className = 'ix-badge ' + (allPass ? 'badge-success' : 'badge-danger');
+        }
+
+        // ===== RELIABILITY CALCULATOR (Section 2.4) =====
+        var relSchemas = {
+            rel_btn: {
+                title: 'BTN Reliability (2.4.1a)', desc: 'MTBF for BTN service disruptions', formula: 'MTBF = Hours in Service / Number of Failures',
+                fields: [{id:'rel_btn_units',label:'Number of BTN Units',val:35,unit:'units'},{id:'rel_btn_f_lt5',label:'Failures (disruption <5 min)',val:2,unit:'faults'},{id:'rel_btn_f_ge5',label:'Failures (disruption \u22655 min)',val:0,unit:'faults'},{id:'rel_btn_oos',label:'Total Out of Service Hours',val:1.0,unit:'hours'}],
+                compute: function(v) { var opHrs=v.rel_btn_units*24*30; var inSvc=opHrs-v.rel_btn_oos; var mtbf_lt5=v.rel_btn_f_lt5>0?inSvc/v.rel_btn_f_lt5:inSvc; var mtbf_ge5=v.rel_btn_f_ge5>0?inSvc/v.rel_btn_f_ge5:inSvc; return [{label:'Operating Hours',value:opHrs.toLocaleString()+' hrs',pass:true},{label:'Hours in Service',value:inSvc.toFixed(1)+' hrs',pass:true},{label:'MTBF (<5 min disruption)',value:Math.round(mtbf_lt5).toLocaleString()+' hrs',target:'\u2265 3,000 hrs',pass:mtbf_lt5>=3000},{label:'MTBF (\u22655 min disruption)',value:Math.round(mtbf_ge5).toLocaleString()+' hrs',target:'\u2265 87,600 hrs (10 yrs)',pass:mtbf_ge5>=87600}]; }
+            },
+            rel_drs: {
+                title: 'DRS Reliability (2.4.1b)', desc: 'MTBF for DRS Base Station disruptions \u22655 min', formula: 'MTBF = Hours in Service / Number of Failures',
+                fields: [{id:'rel_drs_units',label:'Number of DRS Units',val:12,unit:'units'},{id:'rel_drs_f',label:'Failures (disruption \u22655 min)',val:1,unit:'faults'},{id:'rel_drs_oos',label:'Total Out of Service Hours',val:3.0,unit:'hours'}],
+                compute: function(v) { var opHrs=v.rel_drs_units*24*30; var inSvc=opHrs-v.rel_drs_oos; var mtbf=v.rel_drs_f>0?inSvc/v.rel_drs_f:inSvc; return [{label:'Operating Hours',value:opHrs.toLocaleString()+' hrs',pass:true},{label:'DRS MTBF (\u22655 min)',value:Math.round(mtbf).toLocaleString()+' hrs',target:'\u2265 3,000 hrs',pass:mtbf>=3000}]; }
+            },
+            rel_pis: {
+                title: 'PIS Reliability (2.4.1c)', desc: 'MTBF for PIS disruptions \u22655 min', formula: 'MTBF = Hours in Service / Number of Failures',
+                fields: [{id:'rel_pis_units',label:'Number of PIS Units',val:17,unit:'units'},{id:'rel_pis_revhrs',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'rel_pis_f',label:'Failures',val:0,unit:'faults'},{id:'rel_pis_oos',label:'Total OOS Hours',val:0,unit:'hours'}],
+                compute: function(v) { var opHrs=v.rel_pis_units*v.rel_pis_revhrs*30; var inSvc=opHrs-v.rel_pis_oos; var mtbf=v.rel_pis_f>0?inSvc/v.rel_pis_f:inSvc; return [{label:'Operating Hours',value:opHrs.toLocaleString()+' hrs',pass:true},{label:'PIS MTBF',value:Math.round(mtbf).toLocaleString()+' hrs',target:'\u2265 3,000 hrs',pass:mtbf>=3000}]; }
+            },
+            rel_tcs: {
+                title: 'TCS Reliability (2.4.1d)', desc: 'MTBF for TCS disruptions \u22655 min', formula: 'MTBF = Hours in Service / Number of Failures',
+                fields: [{id:'rel_tcs_units',label:'Number of TCS Units',val:18,unit:'trains'},{id:'rel_tcs_revhrs',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'rel_tcs_f',label:'Failures',val:0,unit:'faults'},{id:'rel_tcs_oos',label:'Total OOS Hours',val:0,unit:'hours'}],
+                compute: function(v) { var opHrs=v.rel_tcs_units*v.rel_tcs_revhrs*30; var inSvc=opHrs-v.rel_tcs_oos; var mtbf=v.rel_tcs_f>0?inSvc/v.rel_tcs_f:inSvc; return [{label:'Operating Hours',value:opHrs.toLocaleString()+' hrs',pass:true},{label:'TCS MTBF',value:Math.round(mtbf).toLocaleString()+' hrs',target:'\u2265 75,000 hrs',pass:mtbf>=75000}]; }
+            },
+            rel_rmv: {
+                title: 'Rail Maintenance Vehicle Reliability (2.4.2a)', desc: 'MDBF for all Maintenance Vehicles', formula: 'MDBF = Total Distance (km) / Number of Failures',
+                fields: [{id:'rel_rmv_km',label:'Total Distance Operated',val:90000,unit:'km'},{id:'rel_rmv_f',label:'Number of Failures',val:2,unit:'faults'}],
+                compute: function(v) { var mdbf=v.rel_rmv_f>0?v.rel_rmv_km/v.rel_rmv_f:v.rel_rmv_km; return [{label:'Total Distance',value:v.rel_rmv_km.toLocaleString()+' km',pass:true},{label:'Vehicle MDBF',value:Math.round(mdbf).toLocaleString()+' km',target:'\u2265 28,000 km',pass:mdbf>=28000}]; }
+            },
+            rel_twh: {
+                title: 'Train Wash & Harvesting Reliability (2.4.2b)', desc: 'MTBF for Train Wash system', formula: 'MTBF = Hours in Service / Number of Failures',
+                fields: [{id:'rel_twh_hrs',label:'Scheduled Operating Hours',val:720,unit:'hours'},{id:'rel_twh_f',label:'Number of Failures',val:0,unit:'faults'},{id:'rel_twh_oos',label:'Total OOS Hours',val:0,unit:'hours'}],
+                compute: function(v) { var inSvc=v.rel_twh_hrs-v.rel_twh_oos; var mtbf=v.rel_twh_f>0?inSvc/v.rel_twh_f:inSvc; return [{label:'Hours in Service',value:inSvc.toFixed(1)+' hrs',pass:true},{label:'Train Wash MTBF',value:Math.round(mtbf).toLocaleString()+' hrs',target:'\u2265 1,000 hrs',pass:mtbf>=1000}]; }
+            },
+            rel_psd: {
+                title: 'PSD Reliability (2.4.3)', desc: 'MTBF with no manual operation of PSDs', formula: 'MTBF = Hours in Service / Total Number of Failures',
+                fields: [{id:'rel_psd_units',label:'Number of PSD Units',val:200,unit:'units'},{id:'rel_psd_revhrs',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'rel_psd_f',label:'Manual Operation Incidents',val:0,unit:'faults'},{id:'rel_psd_oos',label:'Total OOS Hours',val:0,unit:'hours'}],
+                compute: function(v) { var opHrs=v.rel_psd_units*v.rel_psd_revhrs*30; var inSvc=opHrs-v.rel_psd_oos; var mtbf=v.rel_psd_f>0?inSvc/v.rel_psd_f:inSvc; return [{label:'Operating Hours',value:opHrs.toLocaleString()+' hrs',pass:true},{label:'PSD MTBF',value:Math.round(mtbf).toLocaleString()+' hrs',target:'\u2265 236,000 hrs',pass:mtbf>=236000},{label:'Manual Operation Incidents',value:v.rel_psd_f+' incidents',target:'0 incidents',pass:v.rel_psd_f===0}]; }
+            },
+            rel_rst: {
+                title: 'Rolling Stock Reliability (2.4.4)', desc: 'MDTF for service delay \u22655 min', formula: 'MDTF = Total Operating KM / Number of Failures',
+                fields: [{id:'rel_rst_km',label:'Total Operating KM',val:250000,unit:'km'},{id:'rel_rst_f',label:'Failures causing \u22655 min delay',val:1,unit:'faults'}],
+                compute: function(v) { var mdtf=v.rel_rst_f>0?v.rel_rst_km/v.rel_rst_f:v.rel_rst_km; return [{label:'Total Operating KM',value:v.rel_rst_km.toLocaleString()+' km',pass:true},{label:'RST MDTF',value:Math.round(mdtf).toLocaleString()+' km',target:'\u2265 150,000 km',pass:mdtf>=150000}]; }
+            },
+            rel_sig_train: {
+                title: 'SIG on Train Reliability (2.4.5a)', desc: 'MDBF for SIG train-borne causing \u22655 min delay', formula: 'MDBF = Total KM / Number of Failures',
+                fields: [{id:'rel_sigt_km',label:'Total SIG Train-Borne KM',val:500000,unit:'km'},{id:'rel_sigt_f',label:'Failures',val:1,unit:'faults'}],
+                compute: function(v) { var mdbf=v.rel_sigt_f>0?v.rel_sigt_km/v.rel_sigt_f:v.rel_sigt_km; return [{label:'SIG Train-Borne MDBF',value:Math.round(mdbf).toLocaleString()+' km',target:'\u2265 375,000 km',pass:mdbf>=375000}]; }
+            },
+            rel_sig_entire: {
+                title: 'Entire SIG System Reliability (2.4.5b)', desc: 'MTBF with zero significant failures', formula: 'MTBF = Hours in Service / Total Number of Failures',
+                fields: [{id:'rel_sige_units',label:'Number of SIG Units',val:30,unit:'units'},{id:'rel_sige_revhrs',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'rel_sige_f_sig',label:'Significant Failures',val:0,unit:'faults'},{id:'rel_sige_f_all',label:'Total Failures (\u22655 min delay)',val:1,unit:'faults'},{id:'rel_sige_oos',label:'Total OOS Hours',val:0,unit:'hours'}],
+                compute: function(v) { var opHrs=v.rel_sige_units*v.rel_sige_revhrs*30; var inSvc=opHrs-v.rel_sige_oos; var mtbf=v.rel_sige_f_all>0?inSvc/v.rel_sige_f_all:inSvc; return [{label:'Operating Hours',value:opHrs.toLocaleString()+' hrs',pass:true},{label:'Entire SIG MTBF',value:Math.round(mtbf).toLocaleString()+' hrs',target:'\u2265 85,000 hrs',pass:mtbf>=85000},{label:'Significant Failures',value:v.rel_sige_f_sig+' incidents',target:'0 (zero)',pass:v.rel_sige_f_sig===0},{label:'Failures \u22655 min delay',value:v.rel_sige_f_all+' incidents',target:'\u2264 5',pass:v.rel_sige_f_all<=5}]; }
+            },
+            rel_sig_pm: {
+                title: 'Turnout Point Machine Reliability (2.4.5c)', desc: 'MCBF for Point Machine operations', formula: 'MCBF = Total Throw Operations / Number of Failures',
+                fields: [{id:'rel_sigpm_throws',label:'Total Throw Operations',val:300000,unit:'throws'},{id:'rel_sigpm_f',label:'Point Machine Failures',val:1,unit:'faults'}],
+                compute: function(v) { var mcbf=v.rel_sigpm_f>0?v.rel_sigpm_throws/v.rel_sigpm_f:v.rel_sigpm_throws; return [{label:'Point Machine MCBF',value:Math.round(mcbf).toLocaleString()+' throws',target:'\u2265 200,000 throws',pass:mcbf>=200000}]; }
+            }
+        };
+
+        // ===== AVAILABILITY CALCULATOR (Section 2.5) =====
+        function makeAvlSchema(title, desc, opFormula, target, fields) {
+            return { title:title, desc:desc, formula:opFormula, fields:fields, target:target };
+        }
+        var avlSchemas = {
+            avl_btn_node: makeAvlSchema('BTN Node Availability (2.5.1a-i)','BTN Node fails to transmit','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.9,[{id:'avl_btn_node_u',label:'Number of BTN Nodes',val:35,unit:'units'},{id:'avl_btn_node_oos',label:'Total OOS Hours',val:5,unit:'hours'}]),
+            avl_btn_eth: makeAvlSchema('Ethernet Switch Availability (2.5.1a-ii)','Ethernet switch fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.99,[{id:'avl_btn_eth_u',label:'Number of Ethernet Switches',val:50,unit:'units'},{id:'avl_btn_eth_oos',label:'Total OOS Hours',val:1,unit:'hours'}]),
+            avl_bbrs_sta: makeAvlSchema('BBRS Station Availability (2.5.1b-i)','BBRS at Station fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.95,[{id:'avl_bbrs_sta_u',label:'Number of BBRS Stations',val:17,unit:'stations'},{id:'avl_bbrs_sta_oos',label:'Total OOS Hours',val:2,unit:'hours'}]),
+            avl_bbrs_train: makeAvlSchema('BBRS on Train Availability (2.5.1b-ii)','BBRS on Train fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.67,[{id:'avl_bbrs_tr_u',label:'Number of BBRS on Trains',val:18,unit:'trains'},{id:'avl_bbrs_tr_rev',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'avl_bbrs_tr_oos',label:'Total OOS Hours',val:5,unit:'hours'}]),
+            avl_cass: makeAvlSchema('CASS Availability (2.5.1c)','CASS fails to operate','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.99,[{id:'avl_cass_u',label:'Number of CASS Units',val:17,unit:'units'},{id:'avl_cass_oos',label:'Total OOS Hours',val:0.5,unit:'hours'}]),
+            avl_cctv: makeAvlSchema('CCTV Recording Availability (2.5.1d)','CCTV fails to record','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.99,[{id:'avl_cctv_u',label:'Number of CCTV Units',val:200,unit:'units'},{id:'avl_cctv_oos',label:'Total OOS Hours',val:2,unit:'hours'}]),
+            avl_drs: makeAvlSchema('DRS Availability (2.5.1e)','DRS fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.9,[{id:'avl_drs_u',label:'Number of DRS Units',val:12,unit:'units'},{id:'avl_drs_oos',label:'Total OOS Hours',val:3,unit:'hours'}]),
+            avl_it: makeAvlSchema('IT Availability (2.5.1f)','IT infrastructure fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.99,[{id:'avl_it_u',label:'Number of IT Units',val:20,unit:'units'},{id:'avl_it_oos',label:'Total OOS Hours',val:1,unit:'hours'}]),
+            avl_mcs: makeAvlSchema('MCS Availability (2.5.1g)','Master Clock System fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.95,[{id:'avl_mcs_u',label:'Number of MCS Units',val:17,unit:'units'},{id:'avl_mcs_oos',label:'Total OOS Hours',val:2,unit:'hours'}]),
+            avl_pa_sys: makeAvlSchema('PA System Overall (2.5.1h-i)','PA fails announcements','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.95,[{id:'avl_pa_sys_u',label:'Number of PA Units',val:17,unit:'units'},{id:'avl_pa_sys_oos',label:'Total OOS Hours',val:2,unit:'hours'}]),
+            avl_pa_equip: makeAvlSchema('PA Equipment (2.5.1h-ii)','PA Main Equipment fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.70,[{id:'avl_pa_eq_u',label:'Number of PA Equipment',val:17,unit:'units'},{id:'avl_pa_eq_oos',label:'Total OOS Hours',val:5,unit:'hours'}]),
+            avl_pid_train: makeAvlSchema('PID on Train (2.5.1h-iii)','PID on Train fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',98.50,[{id:'avl_pidt_u',label:'Number of PID on Trains',val:18,unit:'trains'},{id:'avl_pidt_rev',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'avl_pidt_oos',label:'Total OOS Hours',val:20,unit:'hours'}]),
+            avl_pid_sta: makeAvlSchema('PID on Station (2.5.1h-iv)','PID on Station fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.50,[{id:'avl_pids_u',label:'Number of PID on Stations',val:17,unit:'stations'},{id:'avl_pids_rev',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'avl_pids_oos',label:'Total OOS Hours',val:5,unit:'hours'}]),
+            avl_tel: makeAvlSchema('TEL System (2.5.1h-v)','Telephone System fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.95,[{id:'avl_tel_u',label:'Number of TEL Units',val:17,unit:'units'},{id:'avl_tel_oos',label:'Total OOS Hours',val:2,unit:'hours'}]),
+            avl_tel_pabx: makeAvlSchema('Main PABX (2.5.1h-v)','Main PABX fails','Avail = (720 \u2212 OOS Hours) / 720 \u00d7 100',99.90,[{id:'avl_pabx_oos',label:'Main PABX OOS Hours',val:1,unit:'hours'}]),
+            avl_tel_sat: makeAvlSchema('Satellite PABX (2.5.1h-v)','Satellite PABX fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.95,[{id:'avl_sat_u',label:'Number of Satellite PABX',val:16,unit:'units'},{id:'avl_sat_oos',label:'Total OOS Hours',val:1,unit:'hours'}]),
+            avl_dwe_grind: makeAvlSchema('Rail Head Grinding Vehicle (2.5.2i-i)','Grinding Vehicle fails','Avail = (Sched Hours \u2212 OOS Hours) / Sched Hours \u00d7 100',98.0,[{id:'avl_grind_hrs',label:'Scheduled Operating Hours',val:720,unit:'hours'},{id:'avl_grind_oos',label:'Total OOS Hours',val:8,unit:'hours'}]),
+            avl_dwe_wash: makeAvlSchema('Train Wash & Harvesting (2.5.2i-ii)','Train Wash fails','Avail = (Sched Hours \u2212 OOS Hours) / Sched Hours \u00d7 100',98.0,[{id:'avl_wash_hrs',label:'Scheduled Operating Hours',val:720,unit:'hours'},{id:'avl_wash_oos',label:'Total OOS Hours',val:8,unit:'hours'}]),
+            avl_dwe_lathe: makeAvlSchema('Wheel Lathe Machine (2.5.2i-iii)','Wheel Lathe fails','Avail = (Sched Hours \u2212 OOS Hours) / Sched Hours \u00d7 100',98.0,[{id:'avl_lathe_hrs',label:'Scheduled Operating Hours',val:720,unit:'hours'},{id:'avl_lathe_oos',label:'Total OOS Hours',val:8,unit:'hours'}]),
+            avl_sig_onboard: makeAvlSchema('SIG On-board System (2.5.3j)','SIG On-board fails','Avail = (Op Hours \u2212 OOS Hours) / Op Hours \u00d7 100',99.99,[{id:'avl_sigob_u',label:'Number of SIG On-board Units',val:18,unit:'trains'},{id:'avl_sigob_rev',label:'Revenue Hours/day',val:18,unit:'hrs/day'},{id:'avl_sigob_oos',label:'Total OOS Hours',val:0.5,unit:'hours'}])
+        };
+
+        // ===== MAINTAINABILITY CALCULATOR (Section 2.6) — **FIXED: now includes 'formula' property** =====
+        function makeMntSchema(title, desc, formula, targetVal, targetUnit, fields) {
+            return { title:title, desc:desc, formula:formula, targetVal:targetVal, targetUnit:targetUnit, fields:fields };
+        }
+        var mntSchemas = {
+            mnt_btn: makeMntSchema('BTN System Maintainability (2.6.1a)','BTN fails to transmit \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',0.5,'hours',[{id:'mnt_btn_rt',label:'Total Time to Repair',val:0.8,unit:'hours'},{id:'mnt_btn_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_cass: makeMntSchema('CASS System Maintainability (2.6.1b)','CASS breaks down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',3,'hours',[{id:'mnt_cass_rt',label:'Total Time to Repair',val:4.5,unit:'hours'},{id:'mnt_cass_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_cctv: makeMntSchema('CCTV System Maintainability (2.6.1c)','CCTV breaks down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',3,'hours',[{id:'mnt_cctv_rt',label:'Total Time to Repair',val:5,unit:'hours'},{id:'mnt_cctv_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_drs: makeMntSchema('DRS Maintainability (2.6.1d)','DRS breaks down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',3,'hours',[{id:'mnt_drs_rt',label:'Total Time to Repair',val:5,unit:'hours'},{id:'mnt_drs_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_it: makeMntSchema('IT System Maintainability (2.6.1e)','IT infrastructure breaks down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',3,'hours',[{id:'mnt_it_rt',label:'Total Time to Repair',val:4,unit:'hours'},{id:'mnt_it_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_mcs: makeMntSchema('MCS Maintainability (2.6.1f)','MCS breaks down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',3,'hours',[{id:'mnt_mcs_rt',label:'Total Time to Repair',val:4,unit:'hours'},{id:'mnt_mcs_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_pis: makeMntSchema('PIS Maintainability (2.6.1g)','PA & PID break down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs (per subsystem)',3,'hours',[{id:'mnt_pis_pa_rt',label:'PA Total Repair Time',val:2.5,unit:'hours'},{id:'mnt_pis_pa_rc',label:'PA Number of Repairs',val:1,unit:'repairs'},{id:'mnt_pis_pid_rt',label:'PID Total Repair Time',val:2.5,unit:'hours'},{id:'mnt_pis_pid_rc',label:'PID Number of Repairs',val:1,unit:'repairs'}]),
+            mnt_tel: makeMntSchema('TEL System Maintainability (2.6.1h)','TEL breaks down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',3,'hours',[{id:'mnt_tel_rt',label:'Total Time to Repair',val:4,unit:'hours'},{id:'mnt_tel_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_dwe_veh: makeMntSchema('Rail Maintenance Vehicles (2.6.2a)','Vehicles break down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',12,'hours',[{id:'mnt_veh_rt',label:'Total Time to Repair',val:18,unit:'hours'},{id:'mnt_veh_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_dwe_wash: makeMntSchema('Train Wash & Harvesting (2.6.2b)','Train Wash breaks down \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',24,'hours',[{id:'mnt_wash_rt',label:'Total Time to Repair',val:20,unit:'hours'},{id:'mnt_wash_rc',label:'Total Number of Repairs',val:1,unit:'repairs'}]),
+            mnt_dwe_equip: makeMntSchema('Maintenance Equipment (2.6.2c)','Hydraulic Press, Wheel Lathe, Lifting, Crane, Test Stands','MTTR = Total Repair Time / Number of Repairs',72,'hours',[{id:'mnt_equip_rt',label:'Total Time to Repair',val:48,unit:'hours'},{id:'mnt_equip_rc',label:'Total Number of Repairs',val:1,unit:'repairs'}]),
+            mnt_psd: makeMntSchema('PSD System Maintainability (2.6.3)','PSD fails to open/close \u2192 time to restore','MTTR = Total Repair Time / Number of Repairs',0.5,'hours',[{id:'mnt_psd_rt',label:'Total Time to Repair',val:0.4,unit:'hours'},{id:'mnt_psd_rc',label:'Total Number of Repairs',val:1,unit:'repairs'}]),
+            mnt_rst_lru: makeMntSchema('RST LRU Replacement (2.6.4a)','Remove & replace LRU','MTTR = Total Replacement Time / Number of Replacements',30,'minutes',[{id:'mnt_lru_rt',label:'Total LRU Replacement Time',val:100,unit:'minutes'},{id:'mnt_lru_rc',label:'Total LRU Replacements',val:4,unit:'units'}]),
+            mnt_rst_bogie: makeMntSchema('RST Bogie Replacement (2.6.4b)','Remove & replace bogie','MTTR = Total Replacement Time / Number of Replacements',2,'hours',[{id:'mnt_bogie_rt',label:'Total Bogie Replacement Time',val:3.5,unit:'hours'},{id:'mnt_bogie_rc',label:'Total Bogie Replacements',val:2,unit:'bogies'}]),
+            mnt_rst_major: makeMntSchema('RST Major Unit Replacement (2.6.4c)','Remove & replace major unit (Traction, Compressor, AC, etc.)','MTTR = Total Replacement Time / Number of Replacements',3,'hours',[{id:'mnt_major_rt',label:'Total Major Unit Replacement Time',val:5,unit:'hours'},{id:'mnt_major_rc',label:'Total Major Unit Replacements',val:2,unit:'units'}]),
+            mnt_sig_elec: makeMntSchema('SIG Electronic Parts (2.6.5a)','Electronic parts of Point Machine & SIG on Train','MTTR = Total Repair Time / Number of Repairs',0.5,'hours',[{id:'mnt_sigelec_rt',label:'Total Time to Repair',val:0.8,unit:'hours'},{id:'mnt_sigelec_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}]),
+            mnt_sig_pm: makeMntSchema('Point Machine System (2.6.5b)','Whole replacement of Point Machine','MTTR = Total Replacement Time / Number of Replacements',3,'hours',[{id:'mnt_sigpm_rt',label:'Total Time to Repair/Replace',val:5,unit:'hours'},{id:'mnt_sigpm_rc',label:'Total Number of Repairs',val:2,unit:'repairs'}])
+        };
+
+        // ===== RELIABILITY TAB =====
+        function renderRelInputs() { var k = document.getElementById('sel-rel-sys').value; renderDynamicFields('rel-dynamic-inputs', relSchemas[k].fields); }
+        function computeReliability() {
+            var k = document.getElementById('sel-rel-sys').value;
+            var schema = relSchemas[k];
+            var v = getFieldValues(schema.fields);
+            var results = schema.compute(v);
+            renderResults('rel-report-output','rel-summary-badge','rel-formula-box',schema,results);
+        }
+
+        // ===== AVAILABILITY TAB =====
+        function renderAvlInputs() { var k = document.getElementById('sel-avl-sys').value; renderDynamicFields('avl-dynamic-inputs', avlSchemas[k].fields); }
+        function computeAvailability() {
+            var k = document.getElementById('sel-avl-sys').value;
+            var schema = avlSchemas[k];
+            var v = getFieldValues(schema.fields);
+            var opHrs, oosVal = 0;
+            var hasUnits = schema.fields.find(function(f){return f.id.endsWith('_u');});
+            var hasRev = schema.fields.find(function(f){return f.id.endsWith('_rev');});
+            var hasHrs = schema.fields.find(function(f){return f.id.endsWith('_hrs');});
+            var oosField = schema.fields.find(function(f){return f.id.endsWith('_oos');});
+            if(oosField) oosVal = v[oosField.id];
+            if(k === 'avl_tel_pabx') { opHrs = 720; }
+            else if(hasHrs) { opHrs = v[hasHrs.id]; }
+            else if(hasUnits && hasRev) { opHrs = v[hasUnits.id] * v[hasRev.id] * 30; }
+            else if(hasUnits) { opHrs = v[hasUnits.id] * 24 * 30; }
+            else { opHrs = 720; }
+            var inSvc = opHrs - oosVal;
+            var avail = opHrs > 0 ? (inSvc / opHrs) * 100 : 100;
+            var target = schema.target;
+            var results = [
+                {label:'Operating Hours',value:opHrs.toLocaleString()+' hrs',pass:true},
+                {label:'Hours in Service',value:inSvc.toFixed(1)+' hrs',pass:true},
+                {label:'Availability',value:avail.toFixed(4)+'%',target:'\u2265 '+target+'%',pass:avail>=target}
+            ];
+            renderResults('avl-report-output','avl-summary-badge','avl-formula-box',schema,results);
+        }
+
+        // ===== MAINTAINABILITY TAB =====
+        function renderMntInputs() { var k = document.getElementById('sel-mnt-sys').value; renderDynamicFields('mnt-dynamic-inputs', mntSchemas[k].fields); }
+        function computeMaintainability() {
+            var k = document.getElementById('sel-mnt-sys').value;
+            var schema = mntSchemas[k];
+            var v = getFieldValues(schema.fields);
+            var results = [];
+            if (k === 'mnt_pis') {
+                var pa_mttr = v.mnt_pis_pa_rc > 0 ? v.mnt_pis_pa_rt / v.mnt_pis_pa_rc : v.mnt_pis_pa_rt;
+                var pid_mttr = v.mnt_pis_pid_rc > 0 ? v.mnt_pis_pid_rt / v.mnt_pis_pid_rc : v.mnt_pis_pid_rt;
+                results.push({label:'PA System MTTR',value:pa_mttr.toFixed(2)+' hours',target:'\u2264 3.0 hours',pass:pa_mttr<=3.0});
+                results.push({label:'PID System MTTR',value:pid_mttr.toFixed(2)+' hours',target:'\u2264 3.0 hours',pass:pid_mttr<=3.0});
+            } else {
+                var rtField = schema.fields[0];
+                var rcField = schema.fields[1];
+                var rt = v[rtField.id];
+                var rc = v[rcField.id];
+                var mttr = rc > 0 ? rt / rc : rt;
+                var tgt = schema.targetVal;
+                var unit = schema.targetUnit;
+                results.push({label:'Total Repair Time',value:rt.toFixed(2)+' '+unit,pass:true});
+                results.push({label:'Number of Repairs',value:rc.toString(),pass:true});
+                results.push({label:'MTTR',value:mttr.toFixed(2)+' '+unit,target:'\u2264 '+tgt+' '+unit,pass:mttr<=tgt});
+            }
+            renderResults('mnt-report-output','mnt-summary-badge','mnt-formula-box',schema,results);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             renderRAMInputs();
             runSimTSC();
             runSimTSD();
             runSimAvail();
+        
+            renderRelInputs();
+            renderAvlInputs();
+            renderMntInputs();
         });
-    
-        // ===== SCENARIO DASHBOARD ENGINE =====
-        const savedScenarios = [];
-        const scenarioColors = ['#009999', '#ff9100', '#e6007e', '#00b0f0', '#7b61ff', '#00c853', '#ff5252', '#ffd600'];
-
-        function captureCurrentState() {
-            return {
-                tscRate: appState.tsc,
-                tscDeduct: appState.tscDeduct,
-                tsd2Rate: appState.tsd2,
-                tsd2Deduct: appState.tsd2Deduct,
-                tsd5Rate: appState.tsd5,
-                tsd5Deduct: appState.tsd5Deduct,
-                taRate: appState.ta,
-                taDeduct: appState.taDeduct,
-                psdaRate: appState.psda,
-                psdaDeduct: appState.psdaDeduct,
-                totalDeduct: appState.tscDeduct + appState.tsd2Deduct + appState.tsd5Deduct + appState.taDeduct + appState.psdaDeduct
-            };
-        }
-
-        function saveScenario() {
-            const nameInput = document.getElementById('scenario-name-input');
-            const notesInput = document.getElementById('scenario-notes-input');
-            let name = nameInput.value.trim();
-            if (!name) {
-                name = 'Scenario ' + (savedScenarios.length + 1);
-            }
-            const state = captureCurrentState();
-            state.name = name;
-            state.notes = notesInput.value.trim();
-            state.timestamp = new Date().toLocaleString('en-GB', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
-            state.color = scenarioColors[savedScenarios.length % scenarioColors.length];
-            savedScenarios.push(state);
-
-            nameInput.value = '';
-            notesInput.value = '';
-            renderScenarioDashboard();
-        }
-
-        function deleteScenario(index) {
-            savedScenarios.splice(index, 1);
-            // Reassign colors
-            savedScenarios.forEach((s, i) => { s.color = scenarioColors[i % scenarioColors.length]; });
-            renderScenarioDashboard();
-        }
-
-        function loadScenario(index) {
-            const s = savedScenarios[index];
-            // Update appState
-            appState.tsc = s.tscRate; appState.tscDeduct = s.tscDeduct;
-            appState.tsd2 = s.tsd2Rate; appState.tsd2Deduct = s.tsd2Deduct;
-            appState.tsd5 = s.tsd5Rate; appState.tsd5Deduct = s.tsd5Deduct;
-            appState.ta = s.taRate; appState.taDeduct = s.taDeduct;
-            appState.psda = s.psdaRate; appState.psdaDeduct = s.psdaDeduct;
-            alert('Scenario "' + s.name + '" loaded into simulators. Switch to any KPI tab to see the values reflected in the results.');
-        }
-
-        function renderScenarioDashboard() {
-            const count = savedScenarios.length;
-            document.getElementById('scenario-count-badge').innerText = count + ' Scenario' + (count !== 1 ? 's' : '') + ' Saved';
-
-            const emptyState = document.getElementById('scenario-empty-state');
-            const tableContainer = document.getElementById('scenario-table-container');
-            const chartEmpty = document.getElementById('scenario-chart-empty');
-            const chartContainer = document.getElementById('scenario-chart-container');
-
-            if (count === 0) {
-                emptyState.style.display = 'block';
-                tableContainer.style.display = 'none';
-                chartEmpty.style.display = 'block';
-                chartContainer.style.display = 'none';
-                return;
-            }
-
-            emptyState.style.display = 'none';
-            tableContainer.style.display = 'block';
-            chartEmpty.style.display = 'none';
-            chartContainer.style.display = 'block';
-
-            // Build comparison table
-            const headerRow = document.getElementById('scenario-table-header');
-            const tbody = document.getElementById('scenario-table-body');
-
-            let headerHTML = '<th style="min-width:200px;">KPI Metric</th>';
-            savedScenarios.forEach((s, i) => {
-                headerHTML += `<th style="min-width:140px;">
-                    <div style="display:flex;align-items:center;gap:6px;">
-                        <span style="width:10px;height:10px;border-radius:50%;background:${s.color};display:inline-block;"></span>
-                        <span>${s.name}</span>
-                    </div>
-                    <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">${s.timestamp}</div>
-                    <div style="margin-top:4px;display:flex;gap:4px;">
-                        <button onclick="loadScenario(${i})" style="font-size:10px;padding:2px 8px;border:1px solid var(--ix-brand-teal);background:transparent;color:var(--ix-brand-teal);border-radius:3px;cursor:pointer;">Load</button>
-                        <button onclick="deleteScenario(${i})" style="font-size:10px;padding:2px 8px;border:1px solid var(--ix-status-alarm);background:transparent;color:var(--ix-status-alarm);border-radius:3px;cursor:pointer;">Delete</button>
-                    </div>
-                </th>`;
-            });
-            headerRow.innerHTML = headerHTML;
-
-            const metrics = [
-                { label: 'Train Service Cancellation (TSC)', key: 'tscRate', fmt: v => v.toFixed(3) + '%', target: '\u2264 0.80%', check: v => v <= 0.80 },
-                { label: 'TSC Fee Deduction', key: 'tscDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
-                { label: '2-Min Train Service Delay (TSD)', key: 'tsd2Rate', fmt: v => v.toFixed(3) + '%', target: '\u2264 1.00%', check: v => v <= 1.00 },
-                { label: 'TSD 2-Min Fee Deduction', key: 'tsd2Deduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
-                { label: '5-Min Train Service Delay (TSD)', key: 'tsd5Rate', fmt: v => v.toFixed(3) + '%', target: '\u2264 0.75%', check: v => v <= 0.75 },
-                { label: 'TSD 5-Min Fee Deduction', key: 'tsd5Deduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
-                { label: 'Train Availability (TA)', key: 'taRate', fmt: v => v.toFixed(3) + '%', target: '\u2265 99.90%', check: v => v >= 99.90 },
-                { label: 'TA Fee Deduction', key: 'taDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
-                { label: 'PSD Availability (PSDA)', key: 'psdaRate', fmt: v => v.toFixed(4) + '%', target: '\u2265 99.95%', check: v => v >= 99.95 },
-                { label: 'PSDA Fee Deduction', key: 'psdaDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
-                { label: 'TOTAL FEE DEDUCTION', key: 'totalDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0, isBold: true }
-            ];
-
-            let bodyHTML = '';
-            metrics.forEach(m => {
-                let rowStyle = m.isBold ? ' style="background:rgba(0,153,153,0.06);font-weight:700;"' : '';
-                bodyHTML += `<tr${rowStyle}><td>${m.label}<br><small style="color:var(--text-muted);">Target: ${m.target}</small></td>`;
-                savedScenarios.forEach(s => {
-                    const val = s[m.key];
-                    const pass = m.check(val);
-                    const cls = pass ? 'success' : 'danger';
-                    bodyHTML += `<td><span class="result-val ${cls}" style="font-size:${m.isBold ? '16px' : '13px'};">${m.fmt(val)}</span></td>`;
-                });
-                bodyHTML += '</tr>';
-            });
-            tbody.innerHTML = bodyHTML;
-
-            // Build bar chart
-            renderScenarioChart();
-        }
-
-        function renderScenarioChart() {
-            const chartDiv = document.getElementById('scenario-bar-chart');
-            const legendDiv = document.getElementById('scenario-chart-legend');
-
-            const deductKeys = [
-                { key: 'tscDeduct', label: 'TSC' },
-                { key: 'tsd2Deduct', label: 'TSD 2m' },
-                { key: 'tsd5Deduct', label: 'TSD 5m' },
-                { key: 'taDeduct', label: 'TA' },
-                { key: 'psdaDeduct', label: 'PSDA' },
-                { key: 'totalDeduct', label: 'TOTAL' }
-            ];
-
-            // Find max value for scaling
-            let maxVal = 1;
-            savedScenarios.forEach(s => {
-                deductKeys.forEach(dk => {
-                    if (s[dk.key] > maxVal) maxVal = s[dk.key];
-                });
-            });
-            maxVal = Math.ceil(maxVal * 1.2) || 1;
-
-            let chartHTML = '';
-            deductKeys.forEach(dk => {
-                chartHTML += '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;">';
-                chartHTML += '<div style="display:flex;align-items:flex-end;gap:3px;height:180px;">';
-                savedScenarios.forEach(s => {
-                    const val = s[dk.key];
-                    const h = Math.max(2, (val / maxVal) * 160);
-                    const isTotal = dk.key === 'totalDeduct';
-                    chartHTML += `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-                        <span style="font-size:9px;color:var(--text-muted);">${val.toFixed(1)}%</span>
-                        <div style="width:${isTotal ? 22 : 18}px;height:${h}px;background:${s.color};border-radius:3px 3px 0 0;transition:height 0.3s;opacity:${isTotal ? 1 : 0.85};" title="${s.name}: ${val.toFixed(2)}%"></div>
-                    </div>`;
-                });
-                chartHTML += '</div>';
-                chartHTML += `<div style="font-size:10px;font-weight:600;color:var(--text-primary);margin-top:4px;padding-top:4px;border-top:1px solid var(--border-subtle);white-space:nowrap;">${dk.label}</div>`;
-                chartHTML += '</div>';
-            });
-            chartDiv.innerHTML = chartHTML;
-
-            // Legend
-            let legendHTML = '';
-            savedScenarios.forEach(s => {
-                legendHTML += `<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-primary);">
-                    <span style="width:10px;height:10px;border-radius:50%;background:${s.color};display:inline-block;"></span>
-                    ${s.name}
-                </div>`;
-            });
-            legendDiv.innerHTML = legendHTML;
-        }
-
-        function exportScenariosCSV() {
-            if (savedScenarios.length === 0) {
-                alert('No scenarios to export. Please save at least one scenario first.');
-                return;
-            }
-            const headers = ['Scenario Name','Notes','Saved At','TSC Rate (%)','TSC Deduction (%)','TSD 2m Rate (%)','TSD 2m Deduction (%)','TSD 5m Rate (%)','TSD 5m Deduction (%)','TA Rate (%)','TA Deduction (%)','PSDA Rate (%)','PSDA Deduction (%)','Total Deduction (%)'];
-            let csv = headers.join(',') + '\n';
-            savedScenarios.forEach(s => {
-                csv += [
-                    '"' + s.name + '"',
-                    '"' + (s.notes || '') + '"',
-                    '"' + s.timestamp + '"',
-                    s.tscRate.toFixed(3),
-                    s.tscDeduct.toFixed(2),
-                    s.tsd2Rate.toFixed(3),
-                    s.tsd2Deduct.toFixed(2),
-                    s.tsd5Rate.toFixed(3),
-                    s.tsd5Deduct.toFixed(2),
-                    s.taRate.toFixed(3),
-                    s.taDeduct.toFixed(2),
-                    s.psdaRate.toFixed(4),
-                    s.psdaDeduct.toFixed(2),
-                    s.totalDeduct.toFixed(2)
-                ].join(',') + '\n';
-            });
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'KPI_Scenarios_' + new Date().toISOString().slice(0,10) + '.csv';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
     </script>
 </body>
 </html>
