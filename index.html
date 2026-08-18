@@ -754,6 +754,12 @@
                             <span>Subsystems RAM Target</span>
                         </a>
                     </li>
+                    <li>
+                        <a id="nav-scenario" class="nav-item" onclick="navigate('tab-scenario', this)">
+                            <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                            <span>Scenario Dashboard</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="sidebar-footer">
@@ -870,7 +876,7 @@
                     </div>
 
                     <!-- Link 6: Scenario Dashboard -->
-                    <div class="hub-link-card" onclick="goToTab('tab-overview', 'nav-overview')">
+                    <div class="hub-link-card" onclick="goToTab('tab-scenario', 'nav-scenario')">
                         <div class="hub-card-header">
                             <div class="hub-icon-circle" style="color: #ff9100;">
                                 <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
@@ -1401,6 +1407,90 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+        
+            <!-- TAB 6: SCENARIO DASHBOARD — Save, Compare & Analyze -->
+            <section id="tab-scenario" class="tab-view">
+                <div>
+                    <h1 class="page-title">Scenario Dashboard</h1>
+                    <p class="page-subtitle">Save, compare, and analyze multiple simulation scenarios side-by-side.</p>
+                </div>
+
+                <!-- Save Current Scenario -->
+                <div class="ix-card" style="margin-bottom: 16px;">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <svg class="ix-icon" style="color: var(--ix-brand-teal);" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                            Capture Current Simulation State
+                        </span>
+                        <span class="ix-badge badge-success" id="scenario-count-badge">0 Scenarios Saved</span>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 1; min-width: 220px; margin-bottom: 0;">
+                            <label class="form-label" for="scenario-name-input">Scenario Name</label>
+                            <input type="text" id="scenario-name-input" class="ix-input" placeholder="e.g. Baseline Q1, Worst Case, Optimistic..." style="width: 100%;">
+                        </div>
+                        <div class="form-group" style="flex: 1; min-width: 220px; margin-bottom: 0;">
+                            <label class="form-label" for="scenario-notes-input">Notes (optional)</label>
+                            <input type="text" id="scenario-notes-input" class="ix-input" placeholder="Brief description or context..." style="width: 100%;">
+                        </div>
+                        <button class="ix-btn" onclick="saveScenario()" style="background: var(--ix-brand-teal); color: #fff; border: none; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-weight: 600; height: 40px; white-space: nowrap;">
+                            <svg class="ix-icon" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;fill:currentColor;"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                            Save Scenario
+                        </button>
+                        <button class="ix-btn" onclick="exportScenariosCSV()" style="background: transparent; color: var(--ix-brand-petrol); border: 1px solid var(--ix-brand-petrol); padding: 10px 18px; border-radius: 4px; cursor: pointer; font-weight: 600; height: 40px; white-space: nowrap;">
+                            <svg class="ix-icon" viewBox="0 0 24 24" style="width:16px;height:16px;vertical-align:middle;margin-right:4px;fill:currentColor;"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            Export CSV
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="ix-card" style="margin-bottom: 16px;">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <svg class="ix-icon" style="color: #ff9100;" viewBox="0 0 24 24"><path d="M10 3H4a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1zm10 0h-6a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1zM10 13H4a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-6a1 1 0 00-1-1zm10 0h-6a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-6a1 1 0 00-1-1z"/></svg>
+                            Side-by-Side Comparison
+                        </span>
+                    </div>
+                    <div id="scenario-empty-state" style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
+                        <svg viewBox="0 0 24 24" style="width: 48px; height: 48px; fill: var(--text-muted); opacity: 0.3; margin-bottom: 12px;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">No Scenarios Saved Yet</div>
+                        <div style="font-size: 13px;">Go to any simulator tab (TSC, TSD, Availability), configure your inputs, then return here and click <strong>"Save Scenario"</strong> to capture the current state.</div>
+                    </div>
+                    <div id="scenario-table-container" style="display: none;">
+                        <div class="ix-table-wrapper">
+                            <table class="ix-table" id="scenario-compare-table">
+                                <thead>
+                                    <tr id="scenario-table-header">
+                                        <th style="min-width: 200px;">KPI Metric</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scenario-table-body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Bar Chart Comparison -->
+                <div class="ix-card">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <svg class="ix-icon" style="color: var(--ix-brand-petrol);" viewBox="0 0 24 24"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg>
+                            Fee Deduction Comparison Chart
+                        </span>
+                    </div>
+                    <div id="scenario-chart-empty" style="text-align: center; padding: 36px 20px; color: var(--text-muted);">
+                        <div style="font-size: 13px;">Save at least one scenario to see the visual comparison chart.</div>
+                    </div>
+                    <div id="scenario-chart-container" style="display: none; padding: 16px 0;">
+                        <div style="display: flex; align-items: flex-end; gap: 6px; justify-content: center; min-height: 220px; padding: 0 20px;" id="scenario-bar-chart"></div>
+                        <div style="display: flex; gap: 6px; justify-content: center; margin-top: 8px; flex-wrap: wrap;" id="scenario-chart-legend"></div>
+                    </div>
+                </div>
+
             </section>
 
         </main>
@@ -1941,6 +2031,224 @@
             runSimTSD();
             runSimAvail();
         });
+    
+        // ===== SCENARIO DASHBOARD ENGINE =====
+        const savedScenarios = [];
+        const scenarioColors = ['#009999', '#ff9100', '#e6007e', '#00b0f0', '#7b61ff', '#00c853', '#ff5252', '#ffd600'];
+
+        function captureCurrentState() {
+            return {
+                tscRate: appState.tsc,
+                tscDeduct: appState.tscDeduct,
+                tsd2Rate: appState.tsd2,
+                tsd2Deduct: appState.tsd2Deduct,
+                tsd5Rate: appState.tsd5,
+                tsd5Deduct: appState.tsd5Deduct,
+                taRate: appState.ta,
+                taDeduct: appState.taDeduct,
+                psdaRate: appState.psda,
+                psdaDeduct: appState.psdaDeduct,
+                totalDeduct: appState.tscDeduct + appState.tsd2Deduct + appState.tsd5Deduct + appState.taDeduct + appState.psdaDeduct
+            };
+        }
+
+        function saveScenario() {
+            const nameInput = document.getElementById('scenario-name-input');
+            const notesInput = document.getElementById('scenario-notes-input');
+            let name = nameInput.value.trim();
+            if (!name) {
+                name = 'Scenario ' + (savedScenarios.length + 1);
+            }
+            const state = captureCurrentState();
+            state.name = name;
+            state.notes = notesInput.value.trim();
+            state.timestamp = new Date().toLocaleString('en-GB', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+            state.color = scenarioColors[savedScenarios.length % scenarioColors.length];
+            savedScenarios.push(state);
+
+            nameInput.value = '';
+            notesInput.value = '';
+            renderScenarioDashboard();
+        }
+
+        function deleteScenario(index) {
+            savedScenarios.splice(index, 1);
+            // Reassign colors
+            savedScenarios.forEach((s, i) => { s.color = scenarioColors[i % scenarioColors.length]; });
+            renderScenarioDashboard();
+        }
+
+        function loadScenario(index) {
+            const s = savedScenarios[index];
+            // Update appState
+            appState.tsc = s.tscRate; appState.tscDeduct = s.tscDeduct;
+            appState.tsd2 = s.tsd2Rate; appState.tsd2Deduct = s.tsd2Deduct;
+            appState.tsd5 = s.tsd5Rate; appState.tsd5Deduct = s.tsd5Deduct;
+            appState.ta = s.taRate; appState.taDeduct = s.taDeduct;
+            appState.psda = s.psdaRate; appState.psdaDeduct = s.psdaDeduct;
+            alert('Scenario "' + s.name + '" loaded into simulators. Switch to any KPI tab to see the values reflected in the results.');
+        }
+
+        function renderScenarioDashboard() {
+            const count = savedScenarios.length;
+            document.getElementById('scenario-count-badge').innerText = count + ' Scenario' + (count !== 1 ? 's' : '') + ' Saved';
+
+            const emptyState = document.getElementById('scenario-empty-state');
+            const tableContainer = document.getElementById('scenario-table-container');
+            const chartEmpty = document.getElementById('scenario-chart-empty');
+            const chartContainer = document.getElementById('scenario-chart-container');
+
+            if (count === 0) {
+                emptyState.style.display = 'block';
+                tableContainer.style.display = 'none';
+                chartEmpty.style.display = 'block';
+                chartContainer.style.display = 'none';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            tableContainer.style.display = 'block';
+            chartEmpty.style.display = 'none';
+            chartContainer.style.display = 'block';
+
+            // Build comparison table
+            const headerRow = document.getElementById('scenario-table-header');
+            const tbody = document.getElementById('scenario-table-body');
+
+            let headerHTML = '<th style="min-width:200px;">KPI Metric</th>';
+            savedScenarios.forEach((s, i) => {
+                headerHTML += `<th style="min-width:140px;">
+                    <div style="display:flex;align-items:center;gap:6px;">
+                        <span style="width:10px;height:10px;border-radius:50%;background:${s.color};display:inline-block;"></span>
+                        <span>${s.name}</span>
+                    </div>
+                    <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">${s.timestamp}</div>
+                    <div style="margin-top:4px;display:flex;gap:4px;">
+                        <button onclick="loadScenario(${i})" style="font-size:10px;padding:2px 8px;border:1px solid var(--ix-brand-teal);background:transparent;color:var(--ix-brand-teal);border-radius:3px;cursor:pointer;">Load</button>
+                        <button onclick="deleteScenario(${i})" style="font-size:10px;padding:2px 8px;border:1px solid var(--ix-status-alarm);background:transparent;color:var(--ix-status-alarm);border-radius:3px;cursor:pointer;">Delete</button>
+                    </div>
+                </th>`;
+            });
+            headerRow.innerHTML = headerHTML;
+
+            const metrics = [
+                { label: 'Train Service Cancellation (TSC)', key: 'tscRate', fmt: v => v.toFixed(3) + '%', target: '\u2264 0.80%', check: v => v <= 0.80 },
+                { label: 'TSC Fee Deduction', key: 'tscDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
+                { label: '2-Min Train Service Delay (TSD)', key: 'tsd2Rate', fmt: v => v.toFixed(3) + '%', target: '\u2264 1.00%', check: v => v <= 1.00 },
+                { label: 'TSD 2-Min Fee Deduction', key: 'tsd2Deduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
+                { label: '5-Min Train Service Delay (TSD)', key: 'tsd5Rate', fmt: v => v.toFixed(3) + '%', target: '\u2264 0.75%', check: v => v <= 0.75 },
+                { label: 'TSD 5-Min Fee Deduction', key: 'tsd5Deduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
+                { label: 'Train Availability (TA)', key: 'taRate', fmt: v => v.toFixed(3) + '%', target: '\u2265 99.90%', check: v => v >= 99.90 },
+                { label: 'TA Fee Deduction', key: 'taDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
+                { label: 'PSD Availability (PSDA)', key: 'psdaRate', fmt: v => v.toFixed(4) + '%', target: '\u2265 99.95%', check: v => v >= 99.95 },
+                { label: 'PSDA Fee Deduction', key: 'psdaDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0 },
+                { label: 'TOTAL FEE DEDUCTION', key: 'totalDeduct', fmt: v => v.toFixed(2) + '%', target: '0.00%', check: v => v === 0, isBold: true }
+            ];
+
+            let bodyHTML = '';
+            metrics.forEach(m => {
+                let rowStyle = m.isBold ? ' style="background:rgba(0,153,153,0.06);font-weight:700;"' : '';
+                bodyHTML += `<tr${rowStyle}><td>${m.label}<br><small style="color:var(--text-muted);">Target: ${m.target}</small></td>`;
+                savedScenarios.forEach(s => {
+                    const val = s[m.key];
+                    const pass = m.check(val);
+                    const cls = pass ? 'success' : 'danger';
+                    bodyHTML += `<td><span class="result-val ${cls}" style="font-size:${m.isBold ? '16px' : '13px'};">${m.fmt(val)}</span></td>`;
+                });
+                bodyHTML += '</tr>';
+            });
+            tbody.innerHTML = bodyHTML;
+
+            // Build bar chart
+            renderScenarioChart();
+        }
+
+        function renderScenarioChart() {
+            const chartDiv = document.getElementById('scenario-bar-chart');
+            const legendDiv = document.getElementById('scenario-chart-legend');
+
+            const deductKeys = [
+                { key: 'tscDeduct', label: 'TSC' },
+                { key: 'tsd2Deduct', label: 'TSD 2m' },
+                { key: 'tsd5Deduct', label: 'TSD 5m' },
+                { key: 'taDeduct', label: 'TA' },
+                { key: 'psdaDeduct', label: 'PSDA' },
+                { key: 'totalDeduct', label: 'TOTAL' }
+            ];
+
+            // Find max value for scaling
+            let maxVal = 1;
+            savedScenarios.forEach(s => {
+                deductKeys.forEach(dk => {
+                    if (s[dk.key] > maxVal) maxVal = s[dk.key];
+                });
+            });
+            maxVal = Math.ceil(maxVal * 1.2) || 1;
+
+            let chartHTML = '';
+            deductKeys.forEach(dk => {
+                chartHTML += '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;">';
+                chartHTML += '<div style="display:flex;align-items:flex-end;gap:3px;height:180px;">';
+                savedScenarios.forEach(s => {
+                    const val = s[dk.key];
+                    const h = Math.max(2, (val / maxVal) * 160);
+                    const isTotal = dk.key === 'totalDeduct';
+                    chartHTML += `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                        <span style="font-size:9px;color:var(--text-muted);">${val.toFixed(1)}%</span>
+                        <div style="width:${isTotal ? 22 : 18}px;height:${h}px;background:${s.color};border-radius:3px 3px 0 0;transition:height 0.3s;opacity:${isTotal ? 1 : 0.85};" title="${s.name}: ${val.toFixed(2)}%"></div>
+                    </div>`;
+                });
+                chartHTML += '</div>';
+                chartHTML += `<div style="font-size:10px;font-weight:600;color:var(--text-primary);margin-top:4px;padding-top:4px;border-top:1px solid var(--border-subtle);white-space:nowrap;">${dk.label}</div>`;
+                chartHTML += '</div>';
+            });
+            chartDiv.innerHTML = chartHTML;
+
+            // Legend
+            let legendHTML = '';
+            savedScenarios.forEach(s => {
+                legendHTML += `<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-primary);">
+                    <span style="width:10px;height:10px;border-radius:50%;background:${s.color};display:inline-block;"></span>
+                    ${s.name}
+                </div>`;
+            });
+            legendDiv.innerHTML = legendHTML;
+        }
+
+        function exportScenariosCSV() {
+            if (savedScenarios.length === 0) {
+                alert('No scenarios to export. Please save at least one scenario first.');
+                return;
+            }
+            const headers = ['Scenario Name','Notes','Saved At','TSC Rate (%)','TSC Deduction (%)','TSD 2m Rate (%)','TSD 2m Deduction (%)','TSD 5m Rate (%)','TSD 5m Deduction (%)','TA Rate (%)','TA Deduction (%)','PSDA Rate (%)','PSDA Deduction (%)','Total Deduction (%)'];
+            let csv = headers.join(',') + '\n';
+            savedScenarios.forEach(s => {
+                csv += [
+                    '"' + s.name + '"',
+                    '"' + (s.notes || '') + '"',
+                    '"' + s.timestamp + '"',
+                    s.tscRate.toFixed(3),
+                    s.tscDeduct.toFixed(2),
+                    s.tsd2Rate.toFixed(3),
+                    s.tsd2Deduct.toFixed(2),
+                    s.tsd5Rate.toFixed(3),
+                    s.tsd5Deduct.toFixed(2),
+                    s.taRate.toFixed(3),
+                    s.taDeduct.toFixed(2),
+                    s.psdaRate.toFixed(4),
+                    s.psdaDeduct.toFixed(2),
+                    s.totalDeduct.toFixed(2)
+                ].join(',') + '\n';
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'KPI_Scenarios_' + new Date().toISOString().slice(0,10) + '.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
     </script>
 </body>
 </html>
