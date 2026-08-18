@@ -557,6 +557,20 @@
             color: var(--ix-status-success);
         }
 
+        .result-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--ix-brand-petrol);
+            margin: 12px 0 6px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba(0, 153, 153, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .ix-badge {
             padding: 4px 10px;
             border-radius: 12px;
@@ -576,6 +590,12 @@
             background-color: var(--ix-status-danger-bg);
             color: var(--ix-status-danger);
             border: 1px solid rgba(255, 51, 75, 0.3);
+        }
+
+        .badge-warning {
+            background-color: var(--ix-status-warning-bg);
+            color: var(--ix-status-warning);
+            border: 1px solid rgba(255, 179, 0, 0.3);
         }
 
         /* Tables */
@@ -1181,7 +1201,10 @@
                     </div>
 
                     <div class="ix-card" id="card-ram-results">
-                        <div class="card-header"><span class="card-title">RAM Evaluation Output</span></div>
+                        <div class="card-header">
+                            <span class="card-title">RAM Evaluation Output</span>
+                            <span id="ram-summary-badge" class="ix-badge badge-success">Ready</span>
+                        </div>
                         <div id="ram-report-output">
                             <p style="color: var(--text-secondary); font-size: 14px;">Select a system and click 'Compute RAM Compliance' to inspect detailed results.</p>
                         </div>
@@ -1241,26 +1264,26 @@
                 document.getElementById('in-psda-oos').value = 1.2;
             } else if (type === 'moderate') {
                 document.getElementById('in-tsc-s').value = 1200;
-                document.getElementById('in-tsc-c').value = 12; // 1.0% (>0.8% target)
+                document.getElementById('in-tsc-c').value = 12;
                 document.getElementById('in-tsd2-s').value = 1200;
-                document.getElementById('in-tsd2-c').value = 18; // 1.5% (>1.0% target)
+                document.getElementById('in-tsd2-c').value = 18;
                 document.getElementById('in-tsd5-s').value = 1200;
-                document.getElementById('in-tsd5-c').value = 12; // 1.0% (>0.75% target)
+                document.getElementById('in-tsd5-c').value = 12;
                 document.getElementById('in-ta-pta').value = 17;
                 document.getElementById('in-ta-sta').value = 2;
                 document.getElementById('in-ta-ttr').value = 18;
                 document.getElementById('in-psda-oos').value = 5.0;
             } else if (type === 'critical') {
                 document.getElementById('in-tsc-s').value = 1200;
-                document.getElementById('in-tsc-c').value = 25; // 2.08% (>1.8% cap)
+                document.getElementById('in-tsc-c').value = 25;
                 document.getElementById('in-tsd2-s').value = 1200;
-                document.getElementById('in-tsd2-c').value = 28; // 2.33% (>2.0% cap)
+                document.getElementById('in-tsd2-c').value = 28;
                 document.getElementById('in-tsd5-s').value = 1200;
-                document.getElementById('in-tsd5-c').value = 24; // 2.00% (>1.75% cap)
-                document.getElementById('in-ta-pta').value = 15; // breaches cap
+                document.getElementById('in-tsd5-c').value = 24;
+                document.getElementById('in-ta-pta').value = 15;
                 document.getElementById('in-ta-sta').value = 1;
                 document.getElementById('in-ta-ttr').value = 18;
-                document.getElementById('in-psda-oos').value = 85.0; // severe breach
+                document.getElementById('in-psda-oos').value = 85.0;
             } else if (type === 'random') {
                 document.getElementById('in-tsc-s').value = 1200;
                 document.getElementById('in-tsc-c').value = Math.floor(Math.random() * 20);
@@ -1436,7 +1459,7 @@
                 formula: `
                     <div class="formula-item">1. <span class="formula-var">Node Availability (%)</span> = [(Total Operating Hours - OOS Hours) / Total Operating Hours] &times; 100 &nbsp;|&nbsp; <em>Target &ge; 99.99%</em></div>
                     <div class="formula-item">2. <span class="formula-var">MTTR</span> = Total Time Spent on Repairs / Total Number of Repairs &nbsp;|&nbsp; <em>Target &le; 0.5 hours</em></div>
-                    <div class="formula-item">3. <span class="formula-var">MTBF (&lt; 5m)</span> &ge; 3,000 hrs &nbsp;|&nbsp; <span class="formula-var">MTBF (&ge; 5m)</span> &ge; 10 years</div>
+                    <div class="formula-item">3. <span class="formula-var">MTBF (< 5m)</span> &ge; 3,000 hrs &nbsp;|&nbsp; <span class="formula-var">MTBF (&ge; 5m)</span> &ge; 10 years (87,600 hrs)</div>
                 `,
                 fields: [
                     { id: "ram_btn_nodes", label: "Number of BTN Nodes", val: 35, unit: "nodes" },
@@ -1465,24 +1488,29 @@
                 formula: `
                     <div class="formula-item">1. <span class="formula-var">PA & PID Availability (%)</span> = [(Total Hours - OOS) / Total Hours] &times; 100 &nbsp;|&nbsp; <em>PA &ge; 99.95%, PID &ge; 99.95%</em></div>
                     <div class="formula-item">2. <span class="formula-var">MTTR PA / PID</span> = Repair Time / Number of Repairs &nbsp;|&nbsp; <em>Target &le; 3.0 hours</em></div>
+                    <div class="formula-item">3. <span class="formula-var">PIS MTBF (&ge; 5m)</span> &ge; 3,000 hrs</div>
                 `,
                 fields: [
                     { id: "ram_pis_pa_oos", label: "PA System OOS Hours", val: 1.5, unit: "hours" },
                     { id: "ram_pis_pid_oos", label: "PID System OOS Hours", val: 2.0, unit: "hours" },
-                    { id: "ram_pis_repairs", label: "Number of Repairs", val: 2, unit: "repairs" },
-                    { id: "ram_pis_repair_time", label: "Total Repair Time", val: 3.5, unit: "hours" }
+                    { id: "ram_pis_repairs_pa", label: "PA System Repairs Count", val: 1, unit: "repairs" },
+                    { id: "ram_pis_repair_time_pa", label: "PA Total Repair Time", val: 1.8, unit: "hours" },
+                    { id: "ram_pis_repairs_pid", label: "PID System Repairs Count", val: 1, unit: "repairs" },
+                    { id: "ram_pis_repair_time_pid", label: "PID Total Repair Time", val: 2.2, unit: "hours" },
+                    { id: "ram_pis_disruptions", label: "Disruptions >= 5 mins", val: 0, unit: "faults" }
                 ]
             },
             tcs: {
                 title: "Train Communication System (TCS)",
                 formula: `
-                    <div class="formula-item">1. <span class="formula-var">TCS MTBF</span> = (Number of Units &times; Revenue Hours) / Number of Disruptions &ge; 5m &nbsp;|&nbsp; <em>Target &ge; 75,000 hours</em></div>
+                    <div class="formula-item">1. <span class="formula-var">TCS MTBF</span> = (Number of Units &times; Revenue Hours) / Disruptions &ge; 5m &nbsp;|&nbsp; <em>Target &ge; 75,000 hours</em></div>
                     <div class="formula-item">2. <span class="formula-var">TCS MTTR</span> = Total Repair Time / Number of Repairs &nbsp;|&nbsp; <em>Target &le; 3.0 hours</em></div>
                 `,
                 fields: [
                     { id: "ram_tcs_units", label: "Train Communication Sets", val: 18, unit: "trains" },
                     { id: "ram_tcs_f", label: "TCS Disruptions >= 5 mins", val: 0, unit: "faults" },
-                    { id: "ram_tcs_repairs", label: "Total Repairs", val: 0, unit: "repairs" }
+                    { id: "ram_tcs_repairs", label: "Total Repairs Count", val: 1, unit: "repairs" },
+                    { id: "ram_tcs_repair_time", label: "Total Repair Time", val: 1.5, unit: "hours" }
                 ]
             },
             tel: {
@@ -1504,14 +1532,15 @@
                 formula: `
                     <div class="formula-item">1. <span class="formula-var">Wheel Lathe & Wash Avail.</span> = (Operating - OOS) / Operating &times; 100 &nbsp;|&nbsp; <em>Target &ge; 98.0%</em></div>
                     <div class="formula-item">2. <span class="formula-var">Maintenance Vehicles MDBF</span> = Total Distance (km) / Number of Failures &nbsp;|&nbsp; <em>Target &ge; 28,000 km</em></div>
-                    <div class="formula-item">3. <span class="formula-var">MTTR</span>: Wheel Lathe &le; 24 hrs, Maint. Vehicles &le; 12 hrs, Heavy Equipment &le; 72 hrs</div>
+                    <div class="formula-item">3. <span class="formula-var">MTTR</span>: Wheel Lathe &le; 24 hrs, Maint. Vehicles &le; 12 hrs, Heavy Workshop Equipment &le; 72 hrs</div>
                 `,
                 fields: [
                     { id: "ram_dwe_lathe_op", label: "Wheel Lathe Scheduled Hours", val: 720, unit: "hours" },
                     { id: "ram_dwe_lathe_oos", label: "Wheel Lathe OOS Duration", val: 8, unit: "hours" },
                     { id: "ram_dwe_lathe_repair", label: "Wheel Lathe Repair Time", val: 6, unit: "hours" },
                     { id: "ram_dwe_veh_km", label: "Maint. Vehicles Total Distance", val: 90000, unit: "km" },
-                    { id: "ram_dwe_veh_f", label: "Vehicle Failures", val: 2, unit: "faults" }
+                    { id: "ram_dwe_veh_f", label: "Vehicle Failures", val: 2, unit: "faults" },
+                    { id: "ram_dwe_veh_repair", label: "Vehicle Repair Time", val: 8.5, unit: "hours" }
                 ]
             },
             psd: {
@@ -1523,6 +1552,7 @@
                 fields: [
                     { id: "ram_psd_op_hours", label: "PSD Total Operating Hours", val: 120000, unit: "hours" },
                     { id: "ram_psd_failures", label: "PSD Full Manual Operation Incidents", val: 0, unit: "faults" },
+                    { id: "ram_psd_repairs", label: "Active Repair Count", val: 1, unit: "repairs" },
                     { id: "ram_psd_repair_time", label: "PSD Active Repair Time", val: 0.25, unit: "hours" }
                 ]
             },
@@ -1539,7 +1569,9 @@
                     { id: "ram_rst_lru_repairs", label: "LRU Replacements", val: 4, unit: "units" },
                     { id: "ram_rst_lru_time", label: "Total LRU Replacement Duration", val: 90, unit: "minutes" },
                     { id: "ram_rst_bogie_repairs", label: "Bogie Replacements", val: 1, unit: "bogies" },
-                    { id: "ram_rst_bogie_time", label: "Bogie Replacement Duration", val: 100, unit: "minutes" }
+                    { id: "ram_rst_bogie_time", label: "Bogie Replacement Duration", val: 100, unit: "minutes" },
+                    { id: "ram_rst_major_repairs", label: "Major Unit Replacements", val: 1, unit: "units" },
+                    { id: "ram_rst_major_time", label: "Major Unit Replacement Duration", val: 2.2, unit: "hours" }
                 ]
             },
             sig: {
@@ -1547,7 +1579,7 @@
                 formula: `
                     <div class="formula-item">1. <span class="formula-var">Train-Borne MDBF (&ge; 5m Delay)</span> = Kms in Service / Failures &nbsp;|&nbsp; <em>Target &ge; 375,000 km</em></div>
                     <div class="formula-item">2. <span class="formula-var">Point Machine MCBF</span> = Operating Throws / Failures &nbsp;|&nbsp; <em>Target &ge; 200,000 throw operations</em></div>
-                    <div class="formula-item">3. <span class="formula-var">Electronic MTTR</span> &le; 0.5 hours &nbsp;|&nbsp; <span class="formula-var">Point Machine Whole Replacement MTTR</span> &le; 3.0 hours</div>
+                    <div class="formula-item">3. <span class="formula-var">Electronic MTTR</span> &le; 0.5 hours &nbsp;|&nbsp; <span class="formula-var">Point Machine Replacement MTTR</span> &le; 3.0 hours</div>
                 `,
                 fields: [
                     { id: "ram_sig_km", label: "Signalling Train-Borne KM", val: 500000, unit: "km" },
@@ -1555,7 +1587,8 @@
                     { id: "ram_sig_throws", label: "Point Machine Operations", val: 300000, unit: "throws" },
                     { id: "ram_sig_point_f", label: "Point Machine Failures", val: 1, unit: "faults" },
                     { id: "ram_sig_elec_repairs", label: "SIG Electronic Repairs", val: 1, unit: "repairs" },
-                    { id: "ram_sig_elec_time", label: "Electronic Repair Duration", val: 0.35, unit: "hours" }
+                    { id: "ram_sig_elec_time", label: "Electronic Repair Duration", val: 0.35, unit: "hours" },
+                    { id: "ram_sig_pm_time", label: "Point Machine Replacement Time", val: 2.2, unit: "hours" }
                 ]
             }
         };
@@ -1570,7 +1603,7 @@
             formulaBox.innerHTML = `
                 <div class="formula-header">
                     <svg class="ix-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                    Applicable Formulas: ${schema.title}
+                    Applicable Formulas & Contract Target Limits: ${schema.title}
                 </div>
                 <div class="formula-content">
                     ${schema.formula}
@@ -1592,26 +1625,171 @@
             container.innerHTML = html;
         }
 
+        // COMPREHENSIVE RAM EVALUATION OUTPUT ENGINE
         function computeRAM() {
             const sys = document.getElementById('sel-ram-system').value;
             const container = document.getElementById('ram-report-output');
+            const badge = document.getElementById('ram-summary-badge');
             let out = "";
+            let isAllCompliant = true;
+
+            const makeRow = (label, simVal, targetText, isPass, unit = "") => {
+                if (!isPass) isAllCompliant = false;
+                return `
+                    <div class="result-row">
+                        <div>
+                            <span style="color: var(--text-primary); font-weight: 500;">${label}:</span>
+                            <small style="display: block; font-size: 11px; color: var(--text-muted);">Contract Target: ${targetText}</small>
+                        </div>
+                        <div style="text-align: right; display: flex; align-items: center; gap: 10px;">
+                            <span class="result-val ${isPass ? 'success' : 'danger'}">${simVal} ${unit}</span>
+                            <span class="ix-badge ${isPass ? 'badge-success' : 'badge-danger'}">${isPass ? 'PASS' : 'BREACH'}</span>
+                        </div>
+                    </div>
+                `;
+            };
+
+            const makeSectionHeader = (title) => `
+                <div class="result-section-title">
+                    <svg class="ix-icon" style="width: 14px; height: 14px;" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    ${title}
+                </div>
+            `;
 
             if (sys === 'btn') {
                 const nodes = parseFloat(document.getElementById('ram_btn_nodes').value) || 1;
                 const oos = parseFloat(document.getElementById('ram_btn_oos').value) || 0;
                 const rep = parseFloat(document.getElementById('ram_btn_repair').value) || 0;
                 const f_less = parseFloat(document.getElementById('ram_btn_f_less5').value) || 0;
+                const f_more = parseFloat(document.getElementById('ram_btn_f_more5').value) || 0;
+                
                 const totalHours = nodes * 24 * 30;
-                const avail = ((totalHours - oos) / totalHours) * 100;
-                const mttr = rep / (f_less || 1);
+                const inServiceHours = totalHours - oos;
+                const avail = (inServiceHours / totalHours) * 100;
+                const totalFaults = f_less + f_more;
+                const mttr = totalFaults > 0 ? (rep / totalFaults) : rep;
+                const mtbf_less = f_less > 0 ? (inServiceHours / f_less) : inServiceHours;
 
-                out = `
-                    <div class="result-row"><span>Simulated BTN Node Availability:</span><span class="result-val ${avail >= 99.99 ? 'success' : 'danger'}">${avail.toFixed(4)}%</span></div>
-                    <div class="result-row"><span>Target Limit (&ge; 99.99%):</span><span class="ix-badge ${avail >= 99.99 ? 'badge-success' : 'badge-danger'}">${avail >= 99.99 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                    <div class="result-row"><span>Simulated MTTR:</span><span class="result-val ${mttr <= 0.5 ? 'success' : 'danger'}">${mttr.toFixed(2)} hrs</span></div>
-                    <div class="result-row"><span>Target Limit (&le; 0.5 hrs):</span><span class="ix-badge ${mttr <= 0.5 ? 'badge-success' : 'badge-danger'}">${mttr <= 0.5 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                `;
+                out += makeSectionHeader("Operational Scope & In-Service Hours");
+                out += `<div class="result-row"><span>Total Operating Node-Hours:</span><span class="result-val">${totalHours.toLocaleString()} hrs</span></div>`;
+                out += `<div class="result-row"><span>Hours In Service (Fit for Operation):</span><span class="result-val">${inServiceHours.toFixed(1)} hrs</span></div>`;
+
+                out += makeSectionHeader("Availability & Maintainability Verification");
+                out += makeRow("BTN Node Availability", avail.toFixed(4) + "%", "≥ 99.99%", avail >= 99.99);
+                out += makeRow("Active MTTR", mttr.toFixed(2) + " hrs", "≤ 0.5 hours (30 mins)", mttr <= 0.5);
+
+                out += makeSectionHeader("Reliability (MTBF) Verification");
+                out += makeRow("MTBF (< 5 min disruption)", Math.round(mtbf_less).toLocaleString() + " hrs", "≥ 3,000 hrs", mtbf_less >= 3000);
+                out += makeRow("Disruptions ≥ 5 mins", f_more + " incidents", "0 incidents (MTBF ≥ 10 yrs)", f_more === 0);
+
+            } else if (sys === 'drs') {
+                const units = parseFloat(document.getElementById('ram_drs_units').value) || 1;
+                const f = parseFloat(document.getElementById('ram_drs_f').value) || 0;
+                const oos = parseFloat(document.getElementById('ram_drs_oos').value) || 0;
+                const rep = parseFloat(document.getElementById('ram_drs_repair').value) || 0;
+
+                const totalHours = units * 24 * 30;
+                const inService = totalHours - oos;
+                const avail = (inService / totalHours) * 100;
+                const mttr = f > 0 ? (rep / f) : rep;
+                const mtbf = f > 0 ? (inService / f) : inService;
+
+                out += makeSectionHeader("Operational Scope");
+                out += `<div class="result-row"><span>DRS Fleet Operating Hours:</span><span class="result-val">${totalHours.toLocaleString()} hrs</span></div>`;
+
+                out += makeSectionHeader("RAM Verification Output");
+                out += makeRow("DRS Equipment Availability", avail.toFixed(4) + "%", "≥ 99.90%", avail >= 99.90);
+                out += makeRow("Base Station MTBF (≥ 5m)", Math.round(mtbf).toLocaleString() + " hrs", "≥ 3,000 hrs", mtbf >= 3000);
+                out += makeRow("System MTTR", mttr.toFixed(2) + " hrs", "≤ 3.0 hours", mttr <= 3.0);
+
+            } else if (sys === 'pis') {
+                const pa_oos = parseFloat(document.getElementById('ram_pis_pa_oos').value) || 0;
+                const pid_oos = parseFloat(document.getElementById('ram_pis_pid_oos').value) || 0;
+                const pa_r = parseFloat(document.getElementById('ram_pis_repairs_pa').value) || 1;
+                const pa_t = parseFloat(document.getElementById('ram_pis_repair_time_pa').value) || 0;
+                const pid_r = parseFloat(document.getElementById('ram_pis_repairs_pid').value) || 1;
+                const pid_t = parseFloat(document.getElementById('ram_pis_repair_time_pid').value) || 0;
+                const disrupt = parseFloat(document.getElementById('ram_pis_disruptions').value) || 0;
+
+                const totalOpHours = 24 * 30 * 17; // 17 stations
+                const pa_avail = ((totalOpHours - pa_oos) / totalOpHours) * 100;
+                const pid_avail = ((totalOpHours - pid_oos) / totalOpHours) * 100;
+                const pa_mttr = pa_t / (pa_r || 1);
+                const pid_mttr = pid_t / (pid_r || 1);
+
+                out += makeSectionHeader("Availability Targets");
+                out += makeRow("Public Address (PA) Availability", pa_avail.toFixed(4) + "%", "≥ 99.95%", pa_avail >= 99.95);
+                out += makeRow("Passenger Information Display (PID)", pid_avail.toFixed(4) + "%", "≥ 99.95%", pid_avail >= 99.95);
+
+                out += makeSectionHeader("Maintainability & Reliability");
+                out += makeRow("PA System MTTR", pa_mttr.toFixed(2) + " hrs", "≤ 3.0 hours", pa_mttr <= 3.0);
+                out += makeRow("PID System MTTR", pid_mttr.toFixed(2) + " hrs", "≤ 3.0 hours", pid_mttr <= 3.0);
+                out += makeRow("PIS Disruptions ≥ 5 mins", disrupt + " faults", "0 faults (MTBF ≥ 3,000 hrs)", disrupt === 0);
+
+            } else if (sys === 'tcs') {
+                const units = parseFloat(document.getElementById('ram_tcs_units').value) || 1;
+                const f = parseFloat(document.getElementById('ram_tcs_f').value) || 0;
+                const rep_count = parseFloat(document.getElementById('ram_tcs_repairs').value) || 0;
+                const rep_time = parseFloat(document.getElementById('ram_tcs_repair_time').value) || 0;
+
+                const revHours = units * 18 * 30;
+                const mtbf = f > 0 ? (revHours / f) : revHours;
+                const mttr = rep_count > 0 ? (rep_time / rep_count) : rep_time;
+
+                out += makeSectionHeader("Train Communication Reliability");
+                out += makeRow("TCS In-Service MTBF", Math.round(mtbf).toLocaleString() + " hrs", "≥ 75,000 hrs", mtbf >= 75000);
+                out += makeRow("TCS MTTR", mttr.toFixed(2) + " hrs", "≤ 3.0 hours", mttr <= 3.0);
+
+            } else if (sys === 'tel') {
+                const nodes = parseFloat(document.getElementById('ram_tel_nodes').value) || 1;
+                const tel_oos = parseFloat(document.getElementById('ram_tel_oos').value) || 0;
+                const pabx_oos = parseFloat(document.getElementById('ram_tel_pabx_oos').value) || 0;
+                const rep_t = parseFloat(document.getElementById('ram_tel_repair_time').value) || 0;
+                const rep_c = parseFloat(document.getElementById('ram_tel_repairs').value) || 1;
+
+                const telTotal = nodes * 24 * 30;
+                const pabxTotal = 24 * 30;
+                const tel_avail = ((telTotal - tel_oos) / telTotal) * 100;
+                const pabx_avail = ((pabxTotal - pabx_oos) / pabxTotal) * 100;
+                const mttr = rep_t / rep_c;
+
+                out += makeSectionHeader("Telephone System Availability");
+                out += makeRow("Station Telephone Availability", tel_avail.toFixed(4) + "%", "≥ 99.95%", tel_avail >= 99.95);
+                out += makeRow("Main PABX Availability", pabx_avail.toFixed(4) + "%", "≥ 99.90%", pabx_avail >= 99.90);
+                out += makeRow("Telephone System MTTR", mttr.toFixed(2) + " hrs", "≤ 3.0 hours", mttr <= 3.0);
+
+            } else if (sys === 'dwe') {
+                const lathe_op = parseFloat(document.getElementById('ram_dwe_lathe_op').value) || 1;
+                const lathe_oos = parseFloat(document.getElementById('ram_dwe_lathe_oos').value) || 0;
+                const lathe_rep = parseFloat(document.getElementById('ram_dwe_lathe_repair').value) || 0;
+                const veh_km = parseFloat(document.getElementById('ram_dwe_veh_km').value) || 0;
+                const veh_f = parseFloat(document.getElementById('ram_dwe_veh_f').value) || 0;
+                const veh_rep = parseFloat(document.getElementById('ram_dwe_veh_repair').value) || 0;
+
+                const lathe_avail = ((lathe_op - lathe_oos) / lathe_op) * 100;
+                const mdbf = veh_f > 0 ? (veh_km / veh_f) : veh_km;
+
+                out += makeSectionHeader("Wheel Lathe Performance");
+                out += makeRow("Wheel Lathe Availability", lathe_avail.toFixed(2) + "%", "≥ 98.0%", lathe_avail >= 98.0);
+                out += makeRow("Wheel Lathe MTTR", lathe_rep.toFixed(1) + " hrs", "≤ 24.0 hours", lathe_rep <= 24.0);
+
+                out += makeSectionHeader("Rail Maintenance Vehicles");
+                out += makeRow("Vehicle Fleet MDBF", Math.round(mdbf).toLocaleString() + " km", "≥ 28,000 km", mdbf >= 28000);
+                out += makeRow("Vehicle MTTR", veh_rep.toFixed(1) + " hrs", "≤ 12.0 hours", veh_rep <= 12.0);
+
+            } else if (sys === 'psd') {
+                const op = parseFloat(document.getElementById('ram_psd_op_hours').value) || 1;
+                const f = parseFloat(document.getElementById('ram_psd_failures').value) || 0;
+                const rep_c = parseFloat(document.getElementById('ram_psd_repairs').value) || 1;
+                const rep_t = parseFloat(document.getElementById('ram_psd_repair_time').value) || 0;
+
+                const mtbf = f > 0 ? (op / f) : op;
+                const mttr = rep_t / rep_c;
+
+                out += makeSectionHeader("Platform Screen Doors RAM");
+                out += makeRow("PSD MTBF (Zero Manual Ops)", Math.round(mtbf).toLocaleString() + " hrs", "≥ 236,000 hrs", mtbf >= 236000 && f === 0);
+                out += makeRow("PSD Active MTTR", (mttr * 60).toFixed(1) + " mins", "≤ 30 mins (0.5 hrs)", mttr <= 0.5);
+
             } else if (sys === 'rst') {
                 const km = parseFloat(document.getElementById('ram_rst_km').value) || 1;
                 const f = parseFloat(document.getElementById('ram_rst_f').value) || 1;
@@ -1619,42 +1797,51 @@
                 const lru_t = parseFloat(document.getElementById('ram_rst_lru_time').value) || 0;
                 const bogie_r = parseFloat(document.getElementById('ram_rst_bogie_repairs').value) || 1;
                 const bogie_t = parseFloat(document.getElementById('ram_rst_bogie_time').value) || 0;
+                const maj_r = parseFloat(document.getElementById('ram_rst_major_repairs').value) || 1;
+                const maj_t = parseFloat(document.getElementById('ram_rst_major_time').value) || 0;
 
                 const mdtf = km / f;
                 const lru_mttr = lru_t / lru_r;
                 const bogie_mttr = bogie_t / bogie_r;
+                const maj_mttr = maj_t / maj_r;
 
-                out = `
-                    <div class="result-row"><span>Simulated MDTF (Delay &ge; 5m):</span><span class="result-val ${mdtf >= 150000 ? 'success' : 'danger'}">${Math.round(mdtf).toLocaleString()} km</span></div>
-                    <div class="result-row"><span>Target (&ge; 150,000 km):</span><span class="ix-badge ${mdtf >= 150000 ? 'badge-success' : 'badge-danger'}">${mdtf >= 150000 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                    <div class="result-row"><span>LRU MTTR:</span><span class="result-val ${lru_mttr <= 30 ? 'success' : 'danger'}">${lru_mttr.toFixed(1)} mins</span></div>
-                    <div class="result-row"><span>LRU Target (&le; 30 mins):</span><span class="ix-badge ${lru_mttr <= 30 ? 'badge-success' : 'badge-danger'}">${lru_mttr <= 30 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                    <div class="result-row"><span>Bogie Replacement MTTR:</span><span class="result-val ${bogie_mttr <= 120 ? 'success' : 'danger'}">${bogie_mttr.toFixed(1)} mins</span></div>
-                    <div class="result-row"><span>Bogie Target (&le; 2.0 hrs / 120 mins):</span><span class="ix-badge ${bogie_mttr <= 120 ? 'badge-success' : 'badge-danger'}">${bogie_mttr <= 120 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                `;
+                out += makeSectionHeader("Reliability (MDTF)");
+                out += makeRow("MDTF (Delay ≥ 5m)", Math.round(mdtf).toLocaleString() + " km", "≥ 150,000 km", mdtf >= 150000);
+
+                out += makeSectionHeader("Maintainability (MTTR)");
+                out += makeRow("LRU Replacement MTTR", lru_mttr.toFixed(1) + " mins", "≤ 30.0 mins", lru_mttr <= 30);
+                out += makeRow("Bogie Replacement MTTR", bogie_mttr.toFixed(1) + " mins", "≤ 120 mins (2.0 hrs)", bogie_mttr <= 120);
+                out += makeRow("Major Unit Replacement MTTR", maj_mttr.toFixed(2) + " hrs", "≤ 3.0 hours", maj_mttr <= 3.0);
+
             } else if (sys === 'sig') {
                 const km = parseFloat(document.getElementById('ram_sig_km').value) || 1;
                 const d = parseFloat(document.getElementById('ram_sig_delays').value) || 1;
                 const throws = parseFloat(document.getElementById('ram_sig_throws').value) || 1;
                 const pf = parseFloat(document.getElementById('ram_sig_point_f').value) || 1;
+                const elec_r = parseFloat(document.getElementById('ram_sig_elec_repairs').value) || 1;
                 const elec_t = parseFloat(document.getElementById('ram_sig_elec_time').value) || 0;
+                const pm_t = parseFloat(document.getElementById('ram_sig_pm_time').value) || 0;
 
                 const mdbf = km / d;
                 const mcbf = throws / pf;
+                const elec_mttr = elec_t / elec_r;
 
-                out = `
-                    <div class="result-row"><span>MDBF Train-Borne Signalling:</span><span class="result-val ${mdbf >= 375000 ? 'success' : 'danger'}">${Math.round(mdbf).toLocaleString()} km</span></div>
-                    <div class="result-row"><span>Target (&ge; 375,000 km):</span><span class="ix-badge ${mdbf >= 375000 ? 'badge-success' : 'badge-danger'}">${mdbf >= 375000 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                    <div class="result-row"><span>MCBF Turnout Point Machine:</span><span class="result-val ${mcbf >= 200000 ? 'success' : 'danger'}">${Math.round(mcbf).toLocaleString()} throws</span></div>
-                    <div class="result-row"><span>Target (&ge; 200,000 throws):</span><span class="ix-badge ${mcbf >= 200000 ? 'badge-success' : 'badge-danger'}">${mcbf >= 200000 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                    <div class="result-row"><span>SIG Electronic MTTR:</span><span class="result-val ${elec_t <= 0.5 ? 'success' : 'danger'}">${(elec_t * 60).toFixed(1)} mins</span></div>
-                    <div class="result-row"><span>Target (&le; 0.5 hrs):</span><span class="ix-badge ${elec_t <= 0.5 ? 'badge-success' : 'badge-danger'}">${elec_t <= 0.5 ? 'COMPLIANT' : 'BREACH'}</span></div>
-                `;
+                out += makeSectionHeader("Signalling Reliability");
+                out += makeRow("Train-Borne Signalling MDBF", Math.round(mdbf).toLocaleString() + " km", "≥ 375,000 km", mdbf >= 375000);
+                out += makeRow("Turnout Point Machine MCBF", Math.round(mcbf).toLocaleString() + " throws", "≥ 200,000 throws", mcbf >= 200000);
+
+                out += makeSectionHeader("Signalling Maintainability");
+                out += makeRow("Electronic Parts MTTR", (elec_mttr * 60).toFixed(1) + " mins", "≤ 30 mins (0.5 hrs)", elec_mttr <= 0.5);
+                out += makeRow("Point Machine Whole Replacement", pm_t.toFixed(1) + " hrs", "≤ 3.0 hours", pm_t <= 3.0);
+            }
+
+            // Update badge & summary
+            if (isAllCompliant) {
+                badge.innerText = "ALL TARGETS MET";
+                badge.className = "ix-badge badge-success";
             } else {
-                out = `
-                    <div class="result-row"><span>Status:</span><span class="result-val success">Simulated Successfully</span></div>
-                    <div class="result-row"><span>Overall Subsystem Status:</span><span class="ix-badge badge-success">COMPLIANT</span></div>
-                `;
+                badge.innerText = "TARGET BREACH DETECTED";
+                badge.className = "ix-badge badge-danger";
             }
 
             container.innerHTML = out;
